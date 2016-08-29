@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">TokmanGary_CE01</string>
 
-    
+    <string-array name="api_endpoints">
+        <item>Summer</item>
+        <item>Beach</item>
+        <item>Building</item>
+        <item>Mountain</item>
+        <item>Clouds</item>
+    </string-array>
 </resources>

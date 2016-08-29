@@ -15,8 +15,10 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:layout_gravity="center_horizontal"/>
+        android:id="@+id/endpoint_spinner"
+        android:layout_gravity="center_horizontal"
+        android:entries="@strings/api_endpoints"
+        />
 
     <ListView
         android:layout_width="match_parent"
