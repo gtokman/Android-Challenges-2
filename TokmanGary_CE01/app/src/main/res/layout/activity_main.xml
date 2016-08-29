@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/endpoint_spinner"
         android:layout_gravity="center_horizontal"
-        android:entries="@strings/api_endpoints"
+        android:entries="@array/api_search_terms"
         />
 
     <ListView
