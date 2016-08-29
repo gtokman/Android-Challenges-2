@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import org.apache.commons.io.IOUtils;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +23,7 @@ public class APIClient extends AsyncTask<String, Integer, String> {
     private static final String TAG = "ApiClient";
 
     public interface UpdateUIWithJson {
-        public void parseJson(String json);
+        public void parseJson(String json) throws JSONException;
     }
 
     private Context mContext;
@@ -54,7 +55,7 @@ public class APIClient extends AsyncTask<String, Integer, String> {
     @Override
     protected String doInBackground(String... strings) {
 
-        HttpURLConnection httpURLConnection = null;
+        HttpURLConnection httpURLConnection;
         Log.d(TAG, "doInBackground: " + mBaseUrl + strings[0]);
         // Get Json
         try {
@@ -66,14 +67,13 @@ public class APIClient extends AsyncTask<String, Integer, String> {
 
             String data = IOUtils.toString(inputStream);
             inputStream.close();
+            httpURLConnection.disconnect();
 
             return data;
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            httpURLConnection.disconnect();
         }
 
         return null;
@@ -83,7 +83,11 @@ public class APIClient extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String data) {
         super.onPostExecute(data);
         // Notify
-        mUpdateUIWithJson.parseJson(data);
-        mProgressDialog.hide();
+        try {
+            mUpdateUIWithJson.parseJson(data);
+            mProgressDialog.hide();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
