@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.garytokman.tokmangary_ce01.model.Repositories;
 import com.garytokman.tokmangary_ce01.model.Repository;
 import com.garytokman.tokmangary_ce01.network.APIClient;
 
@@ -17,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements APIClient.UpdateU
     }
 
     @Override
-    public void parseJson(String json) throws JSONException {
+    public void parseJson(String json) throws JSONException, IOException, ClassNotFoundException {
 //        Log.d(TAG, "parseJson() called with: " + "json = " + json);
         JSONObject object = new JSONObject(json);
         JSONArray items = object.getJSONArray("items");
@@ -78,20 +80,17 @@ public class MainActivity extends AppCompatActivity implements APIClient.UpdateU
 
             mRepositories.add(new Repository(stars, description, name));
         }
+        updateUI();
+    }
 
+    private void updateUI() throws IOException, ClassNotFoundException {
         // Save data
-    }
+        Repositories repositories = new Repositories(this, mRepositories);
+        repositories.saveDataToFile();
 
-    private void saveDataToFile() {
-
-    }
-
-    private void loadDataToFile() {
-
-    }
-
-    private void updateUI() {
-        ArrayAdapter<Repository> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mRepositories);
+        // Load
+        ArrayAdapter<Repository> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, repositories.readDataFromFile());
         mListView.setAdapter(arrayAdapter);
     }
+
 }

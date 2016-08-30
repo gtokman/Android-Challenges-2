@@ -23,7 +23,7 @@ public class APIClient extends AsyncTask<String, Integer, String> {
     private static final String TAG = "ApiClient";
 
     public interface UpdateUIWithJson {
-        public void parseJson(String json) throws JSONException;
+        public void parseJson(String json) throws JSONException, IOException, ClassNotFoundException;
     }
 
     private Context mContext;
@@ -87,6 +87,10 @@ public class APIClient extends AsyncTask<String, Integer, String> {
             mUpdateUIWithJson.parseJson(data);
             mProgressDialog.hide();
         } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

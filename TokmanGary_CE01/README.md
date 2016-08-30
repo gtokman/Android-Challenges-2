@@ -43,12 +43,11 @@
     // Write object
     oo.writeObject(myObj)
     
-    // Close steams
+    // Close streams
     fo.close()
     oo.close()
     
-    // Catch Exception
-    
+    // Catch Exception 
     ```
     
 * Example deserialize data
@@ -72,5 +71,4 @@
     oi.close()
     
     // Catch Exception
-    
     ```
