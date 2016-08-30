@@ -4,7 +4,9 @@ package com.garytokman.tokmangary_ce01.model;
 // JAV2 - 1609
 // Repository
 
-public class Repository {
+import java.io.Serializable;
+
+public class Repository implements Serializable {
 
     private String mRepoName;
     private String mDescription;

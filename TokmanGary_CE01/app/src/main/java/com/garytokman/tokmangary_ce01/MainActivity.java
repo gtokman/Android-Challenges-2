@@ -79,11 +79,19 @@ public class MainActivity extends AppCompatActivity implements APIClient.UpdateU
             mRepositories.add(new Repository(stars, description, name));
         }
 
-        updateUI();
+        // Save data
+    }
+
+    private void saveDataToFile() {
+
+    }
+
+    private void loadDataToFile() {
+
     }
 
     private void updateUI() {
-        ArrayAdapter<Repository> arrayAdapter = new ArrayAdapter<Repository>(this, android.R.layout.simple_list_item_1, mRepositories);
+        ArrayAdapter<Repository> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mRepositories);
         mListView.setAdapter(arrayAdapter);
     }
 }
