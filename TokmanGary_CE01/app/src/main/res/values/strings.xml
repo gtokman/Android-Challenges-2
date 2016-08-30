@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">TokmanGary_CE01</string>
+    <string name="alert_title_network">Network Info</string>
 
     <string-array name="api_search_terms">
         <item>Swift</item>

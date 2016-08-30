@@ -1,5 +1,9 @@
 package com.garytokman.tokmangary_ce01;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -47,7 +51,20 @@ public class MainActivity extends AppCompatActivity implements APIClient.UpdateU
         mEndPointSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                handleSelectedEndpoint(adapterView.getSelectedItem().toString());
+                if (isNetworkOn()) {
+//                    alert(view.getContext(), "Network Info", "Your connected to the network").show();
+                    handleSelectedEndpoint(adapterView.getSelectedItem().toString());
+                } else {
+                    // TODO: LoadData from File
+                    alert(view.getContext(), "Network Info", "Your are not connected sorry!").show();
+                    Repositories repositories = new Repositories(view.getContext());
+                    Log.d(TAG, "onItemSelected: Loading........... saved data............");
+                    try {
+                        loadRepositoriesLocal(repositories);
+                    } catch (IOException | ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
             @Override
@@ -80,17 +97,42 @@ public class MainActivity extends AppCompatActivity implements APIClient.UpdateU
 
             mRepositories.add(new Repository(stars, description, name));
         }
-        updateUI();
+        saveRepositoriesLocal();
     }
 
-    private void updateUI() throws IOException, ClassNotFoundException {
+    private void saveRepositoriesLocal() throws IOException, ClassNotFoundException {
         // Save data
         Repositories repositories = new Repositories(this, mRepositories);
         repositories.saveDataToFile();
 
-        // Load
-        ArrayAdapter<Repository> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, repositories.readDataFromFile());
-        mListView.setAdapter(arrayAdapter);
+        loadRepositoriesLocal(repositories);
     }
 
+    private void loadRepositoriesLocal(Repositories repositories) throws IOException, ClassNotFoundException {
+        // Load
+        if (repositories.doesFileExist()) {
+
+            ArrayAdapter<Repository> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, repositories.readDataFromFile());
+            mListView.setAdapter(arrayAdapter);
+        } else {
+            alert(this, "No Saved Files", "Sorry there are no saved files to load!").show();
+        }
+    }
+
+    public AlertDialog.Builder alert(Context context, String title, String message) {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
+        alertBuilder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("OK", null);
+
+        return alertBuilder;
+    }
+
+    public boolean isNetworkOn() {
+        // Get network info
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        return networkInfo != null && networkInfo.isConnected();
+    }
 }

@@ -19,15 +19,21 @@ import java.util.List;
 public class Repositories {
 
     private static final String TAG = "Repositories";
+    private static final String FILE_NAME = "Repositories";
     private List<Repository> mRepositories;
-    private Context mContext;
-    private String fileName = "Repositories";
     private File mFile;
 
     public Repositories(Context context, List<Repository> repositories) {
-        mContext = context;
         mRepositories = repositories;
-        mFile = new File(mContext.getFilesDir(), fileName);
+        mFile = new File(context.getFilesDir(), FILE_NAME);
+    }
+
+    public Repositories(Context context) {
+        mFile = new File(context.getFilesDir(), FILE_NAME);
+    }
+
+    public boolean doesFileExist() {
+        return mFile.exists();
     }
 
     public void saveDataToFile() throws IOException {
