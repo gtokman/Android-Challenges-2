@@ -18,18 +18,6 @@ public class Repository implements Serializable {
         mRepoName = repoName;
     }
 
-    public String getRepoName() {
-        return mRepoName;
-    }
-
-    public String getDescription() {
-        return mDescription;
-    }
-
-    public int getStarCount() {
-        return mStarCount;
-    }
-
     @Override
     public String toString() {
         return String.format("Repository: %s%nStars: %d%nDescription: %s", mRepoName, mStarCount, mDescription);

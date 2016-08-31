@@ -15,7 +15,6 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class APIClient extends AsyncTask<String, Integer, String> {
@@ -23,13 +22,12 @@ public class APIClient extends AsyncTask<String, Integer, String> {
     private static final String TAG = "ApiClient";
 
     public interface UpdateUIWithJson {
-        public void parseJson(String json) throws JSONException, IOException, ClassNotFoundException;
+        void parseJson(String json) throws JSONException, IOException, ClassNotFoundException;
     }
 
     private Context mContext;
     private ProgressDialog mProgressDialog;
     private UpdateUIWithJson mUpdateUIWithJson;
-    private String mBaseUrl = "https://api.github.com/search/repositories?q=";
 
     public APIClient(Context context) {
         mContext = context;
@@ -56,10 +54,11 @@ public class APIClient extends AsyncTask<String, Integer, String> {
     protected String doInBackground(String... strings) {
 
         HttpURLConnection httpURLConnection;
-        Log.d(TAG, "doInBackground: " + mBaseUrl + strings[0]);
+        String baseUrl = "https://api.github.com/search/repositories?q=";
+        Log.d(TAG, "doInBackground: " + baseUrl + strings[0]);
         // Get Json
         try {
-            URL url = new URL(mBaseUrl + strings[0]);
+            URL url = new URL(baseUrl + strings[0]);
             httpURLConnection = (HttpURLConnection) url.openConnection();
 
             httpURLConnection.connect();
@@ -70,8 +69,6 @@ public class APIClient extends AsyncTask<String, Integer, String> {
             httpURLConnection.disconnect();
 
             return data;
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,11 +83,7 @@ public class APIClient extends AsyncTask<String, Integer, String> {
         try {
             mUpdateUIWithJson.parseJson(data);
             mProgressDialog.hide();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (JSONException | IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }

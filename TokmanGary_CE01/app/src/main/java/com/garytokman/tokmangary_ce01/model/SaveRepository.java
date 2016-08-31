@@ -2,7 +2,7 @@ package com.garytokman.tokmangary_ce01.model;
 
 // Gary Guerman Tokman
 // JAV2 - 1609
-// Repositories
+// SaveRepository
 
 import android.content.Context;
 import android.util.Log;
@@ -13,23 +13,27 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class Repositories {
+public class SaveRepository {
 
-    private static final String TAG = "Repositories";
-    private static final String FILE_NAME = "Repositories";
-    private List<Repository> mRepositories;
+    private static final String TAG = "RepositoriesFile";
+    private static final String FILE_NAME = "SaveRepository";
+    private Map<String, List<Repository>> mRepositories;
     private File mFile;
 
-    public Repositories(Context context, List<Repository> repositories) {
+    public SaveRepository(Context context, Map<String, List<Repository>> repositories) {
         mRepositories = repositories;
         mFile = new File(context.getFilesDir(), FILE_NAME);
     }
 
-    public Repositories(Context context) {
-        mFile = new File(context.getFilesDir(), FILE_NAME);
+    public SaveRepository(Context context) {
+        mFile = new  File(context.getFilesDir(), FILE_NAME);
+    }
+
+    public void setRepositories(Map<String, List<Repository>> repositories) {
+        mRepositories = repositories;
     }
 
     public boolean doesFileExist() {
@@ -52,9 +56,9 @@ public class Repositories {
         objectOutputStream.close();
     }
 
-    public List<Repository> readDataFromFile() throws ClassNotFoundException, IOException {
+    public Map<String, List<Repository>> readDataFromFile() throws ClassNotFoundException, IOException {
 
-        List<Repository> repositories = new ArrayList<>();
+        Map<String, List<Repository>> map;
 
         // Create stream
         FileInputStream fileInputStream = new FileInputStream(mFile);
@@ -63,14 +67,14 @@ public class Repositories {
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 
         // Read
-        repositories = (List<Repository>) objectInputStream.readObject();
+        map = (Map<String, List<Repository>>) objectInputStream.readObject();
 
         // Close
         fileInputStream.close();
         objectInputStream.close();
 
-        Log.d(TAG, "readDataFromFile() returned: " + repositories);
+        Log.d(TAG, "readDataFromFile() returned: " + map);
 
-        return repositories;
+        return map;
     }
 }
