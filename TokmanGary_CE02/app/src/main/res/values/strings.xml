@@ -2,10 +2,14 @@
     <string name="app_name">TokmanGary_CE02</string>
     <string name="save_button">Save</string>
     <string name="refresh_button_contentDesc">Refresh</string>
+    <string name="hint_player_name">Player name</string>
+    <string name="hint_player_position">Player position</string>
+    <string name="hint_player_age">Player age</string>
+    <string name="hint_number_of_homeruns">Number of Homeruns</string>
 
     <string-array name="object_array">
-        <item>Pikachu</item>
-        <item>Squirtle</item>
-        <item>Charmander</item>
+        <item>Basketball Player</item>
+        <item>Baseball Player</item>
+        <item>Football Player</item>
     </string-array>
 </resources>
