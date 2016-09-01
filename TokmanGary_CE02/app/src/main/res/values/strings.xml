@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TokmanGary_CE02</string>
+    <string name="save_button">Save</string>
+    <string name="refresh_button_contentDesc">Refresh</string>
+
+    <string-array name="object_array">
+        <item>Pikachu</item>
+        <item>Squirtle</item>
+        <item>Charmander</item>
+    </string-array>
 </resources>
