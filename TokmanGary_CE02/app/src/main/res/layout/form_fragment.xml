@@ -29,6 +29,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:inputType="number"
         android:hint="@string/hint_player_age"/>
 
     <EditText
@@ -38,5 +39,13 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:inputType="number"
         android:hint="@string/hint_number_of_homeruns"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_button"
+        android:id="@+id/save_button"
+        android:layout_gravity="center_horizontal"/>
 </LinearLayout>

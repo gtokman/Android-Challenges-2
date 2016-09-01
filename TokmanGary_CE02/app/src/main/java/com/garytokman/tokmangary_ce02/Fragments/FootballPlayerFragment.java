@@ -4,9 +4,10 @@ package com.garytokman.tokmangary_ce02.Fragments;
 // JAVA 2 1609
 // FootballPlayerFragment
 
-public class FootballPlayerFragment extends ForumFragment {
+public class FootballPlayerFragment extends AthleteFragment {
     @Override
     public String getCustomHintText() {
         return "Number of Touchdowns";
     }
+
 }

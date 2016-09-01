@@ -4,9 +4,10 @@ package com.garytokman.tokmangary_ce02.Fragments;
 // JAVA 2 1609
 // BasketballPlayerFragment
 
-public class BasketballPlayerFragment extends ForumFragment {
+public class BasketballPlayerFragment extends AthleteFragment {
     @Override
     public String getCustomHintText() {
         return "Number of 3 pointers";
     }
+
 }

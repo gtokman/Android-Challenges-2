@@ -4,9 +4,19 @@ package com.garytokman.tokmangary_ce02.Fragments;
 // JAVA 2 1609
 // BaseballPlayerFragment
 
-public class BaseballPlayerFragment extends ForumFragment {
+import android.text.Editable;
+
+public class BaseballPlayerFragment extends AthleteFragment {
     @Override
     public String getCustomHintText() {
         return "Number of Homeruns";
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
+        super.afterTextChanged(editable);
+
+        // Load model
+
     }
 }

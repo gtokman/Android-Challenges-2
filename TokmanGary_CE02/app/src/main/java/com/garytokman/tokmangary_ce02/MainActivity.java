@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
@@ -26,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String BASEBALL_PLAYER = "Baseball Player";
     private static final String BASKETBALL_PLAYER = "Basketball Player";
     private static final String FOOTBALL_PLAYER = "Football Player";
-    private static final String FORM_FRAGMENT = "Form_Fragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +39,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             spinner.setOnItemSelectedListener(this);
             ImageButton refreshButton = (ImageButton) findViewById(R.id.button_refresh);
             refreshButton.setOnClickListener(this);
-            Button saveButton = (Button) findViewById(R.id.save_button);
-            saveButton.setOnClickListener(this);
         }
     }
 
@@ -53,10 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d(TAG, "onClick: Refresh!");
                 // TODO: Update List Fragment with User Added Vehicle
                 break;
-            case R.id.save_button:
-                Log.d(TAG, "onClick: Save!");
-                // TODO: Save Form Input in ArrayList
-                break;
             default:
                 break;
         }
@@ -66,23 +58,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String selectedPlayer = adapterView.getSelectedItem().toString();
         Log.d(TAG, "onItemSelected: " + selectedPlayer);
+        // Create fragment
         Fragment fragment = getFragmentManager().findFragmentByTag(selectedPlayer);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-        switch (selectedPlayer) {
-            case BASKETBALL_PLAYER:
-                fragment = new BasketballPlayerFragment();
-                break;
-            case BASEBALL_PLAYER:
-                fragment = new BaseballPlayerFragment();
-                break;
-            case FOOTBALL_PLAYER:
-                fragment = new FootballPlayerFragment();
-                break;
-            default:
-                break;
+        // Check if Fragment exists
+        if (fragment == null) {
+            switch (selectedPlayer) {
+                case BASKETBALL_PLAYER:
+                    fragment = new BasketballPlayerFragment();
+                    break;
+                case BASEBALL_PLAYER:
+                    fragment = new BaseballPlayerFragment();
+                    break;
+                case FOOTBALL_PLAYER:
+                    fragment = new FootballPlayerFragment();
+                    break;
+                default:
+                    break;
+            }
         }
 
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        // Replace container with selected Fragment
         transaction.replace(R.id.form_container, fragment, selectedPlayer)
                 .addToBackStack(null)
                 .commit();
