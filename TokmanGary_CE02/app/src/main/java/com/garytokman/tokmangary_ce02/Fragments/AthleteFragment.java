@@ -4,6 +4,7 @@ import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 
+import com.garytokman.tokmangary_ce02.Model.BasketballPlayer;
 import com.garytokman.tokmangary_ce02.R;
 
 /**
@@ -40,6 +41,11 @@ public class AthleteFragment extends ForumFragment {
                 String position = getText(mPositionEditText);
                 String age = getText(mAgeEditText);
                 String custom = getText(mCustomEditText);
+
+                // Create Athlete
+                BasketballPlayer basketBallPlayer =
+                        new BasketballPlayer(name, position, Integer.parseInt(age), Integer.parseInt(custom));
+                mAthletes.add(basketBallPlayer);
 
                 Log.d(TAG, "Name: " + name + " position: " + position + " age: " + age + " cust: " + custom);
                 break;

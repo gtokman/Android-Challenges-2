@@ -11,7 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.garytokman.tokmangary_ce02.Model.Athlete;
 import com.garytokman.tokmangary_ce02.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // Gary Guerman Tokman
 // JAVA 2 1609
@@ -24,8 +28,10 @@ public abstract class ForumFragment extends Fragment implements TextWatcher, Vie
     protected EditText mPositionEditText;
     protected EditText mAgeEditText;
     protected EditText mCustomEditText;
+    protected List<Athlete> mAthletes;
 
     @Override
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
@@ -44,6 +50,7 @@ public abstract class ForumFragment extends Fragment implements TextWatcher, Vie
         mAgeEditText = (EditText) view.findViewById(R.id.age_text);
         mCustomEditText = (EditText) view.findViewById(R.id.custom_text);
         mCustomEditText.setHint(getCustomHintText());
+        mAthletes = new ArrayList<>();
 
         // Listeners
         mNameEditText.addTextChangedListener(this);
