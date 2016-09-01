@@ -11,11 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.garytokman.tokmangary_ce02.Model.Athlete;
 import com.garytokman.tokmangary_ce02.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 // Gary Guerman Tokman
 // JAVA 2 1609
@@ -28,7 +24,7 @@ public abstract class ForumFragment extends Fragment implements TextWatcher, Vie
     protected EditText mPositionEditText;
     protected EditText mAgeEditText;
     protected EditText mCustomEditText;
-    protected List<Athlete> mAthletes;
+    protected Button mSaveButton;
 
     @Override
 
@@ -44,22 +40,29 @@ public abstract class ForumFragment extends Fragment implements TextWatcher, Vie
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.form_fragment, container, false);
 
         // Init Widgets
-        Button saveButton = (Button) view.findViewById(R.id.save_button);
+        mSaveButton = (Button) view.findViewById(R.id.save_button);
         mNameEditText = (EditText) view.findViewById(R.id.name_text);
         mPositionEditText = (EditText) view.findViewById(R.id.position_text);
         mAgeEditText = (EditText) view.findViewById(R.id.age_text);
         mCustomEditText = (EditText) view.findViewById(R.id.custom_text);
         mCustomEditText.setHint(getCustomHintText());
-        mAthletes = new ArrayList<>();
 
         // Listeners
         mNameEditText.addTextChangedListener(this);
         mPositionEditText.addTextChangedListener(this);
         mAgeEditText.addTextChangedListener(this);
         mCustomEditText.addTextChangedListener(this);
-        saveButton.setOnClickListener(this);
+        mSaveButton.setOnClickListener(this);
 
         return view;
+    }
+
+    protected void clearTextFields() {
+        // Clear fields
+        mNameEditText.getText().clear();
+        mPositionEditText.getText().clear();
+        mAgeEditText.getText().clear();
+        mCustomEditText.getText().clear();
     }
 
     protected String getText(EditText editText) {
@@ -73,5 +76,4 @@ public abstract class ForumFragment extends Fragment implements TextWatcher, Vie
     }
 
     protected abstract String getCustomHintText();
-
 }

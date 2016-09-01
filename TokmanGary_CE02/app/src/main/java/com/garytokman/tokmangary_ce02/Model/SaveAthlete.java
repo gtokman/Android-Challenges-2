@@ -11,9 +11,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-/**
- * Created by gtokman1 on 9/1/16.
- */
+// Gary Guerman Tokman
+// JAVA 2 1609
+// SaveAthlete
+
 public class SaveAthlete {
 
     private static final String FILE_NAME = "AthleteFile";
@@ -28,6 +29,10 @@ public class SaveAthlete {
 
     public SaveAthlete(Context context) {
         mFile = new File(context.getFilesDir(), FILE_NAME);
+    }
+
+    public void setAthletes(List<Athlete> athletes) {
+        mAthletes = athletes;
     }
 
     public void SaveAthletes() {

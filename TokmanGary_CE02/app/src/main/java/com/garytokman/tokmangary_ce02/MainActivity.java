@@ -2,7 +2,6 @@ package com.garytokman.tokmangary_ce02;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,9 +10,14 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.garytokman.tokmangary_ce02.Fragments.AthleteListFragment;
 import com.garytokman.tokmangary_ce02.Fragments.BaseballPlayerFragment;
 import com.garytokman.tokmangary_ce02.Fragments.BasketballPlayerFragment;
 import com.garytokman.tokmangary_ce02.Fragments.FootballPlayerFragment;
+import com.garytokman.tokmangary_ce02.Model.Athlete;
+import com.garytokman.tokmangary_ce02.Model.SaveAthlete;
+
+import java.util.List;
 
 // Gary Guerman Tokman
 // JAVA 2 1609
@@ -22,6 +26,7 @@ import com.garytokman.tokmangary_ce02.Fragments.FootballPlayerFragment;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private static final String TAG = "MainActivity";
+    private static final String ATHLETE_LIST = "Athlete_List_Fragment";
     private static final String BASEBALL_PLAYER = "Baseball Player";
     private static final String BASKETBALL_PLAYER = "Basketball Player";
     private static final String FOOTBALL_PLAYER = "Football Player";
@@ -31,15 +36,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Configuration configuration = getResources().getConfiguration();
-        if (configuration.orientation == configuration.ORIENTATION_LANDSCAPE) {
-
             // Init UI
             Spinner spinner = (Spinner) findViewById(R.id.object_spinner);
             spinner.setOnItemSelectedListener(this);
             ImageButton refreshButton = (ImageButton) findViewById(R.id.button_refresh);
             refreshButton.setOnClickListener(this);
-        }
     }
 
     @Override
@@ -47,7 +48,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.button_refresh:
                 Log.d(TAG, "onClick: Refresh!");
-                // TODO: Update List Fragment with User Added Vehicle
+                // Get saved Athletes
+                SaveAthlete saveAthlete = new SaveAthlete(view.getContext());
+
+                // Hold saved
+                List<Athlete> athletes = saveAthlete.loadAthletes();
+
+                // Create Athlete list fragment with factory patter
+                AthleteListFragment athleteListFragment = AthleteListFragment.newInstance(athletes);
+
+                // Add fragment
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction
+                        .replace(R.id.list_container, athleteListFragment, ATHLETE_LIST)
+                        .commit();
+
                 break;
             default:
                 break;
