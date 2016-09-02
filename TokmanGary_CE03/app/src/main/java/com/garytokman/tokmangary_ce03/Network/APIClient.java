@@ -21,7 +21,7 @@ public class APIClient extends AsyncTask<String, Integer, String> {
     private static final String TAG = "AsyncTask";
 
     public interface APIClientJson {
-        void getJson(String json);
+        void parseJson(String json);
     }
 
     private Context mContext;
@@ -48,13 +48,12 @@ public class APIClient extends AsyncTask<String, Integer, String> {
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressDialog.setMessage("Loading...");
         mProgressDialog.show();
-
     }
 
     @Override
     protected String doInBackground(String... strings) {
 
-        String baseUrl = "";
+        String baseUrl = "https://api.github.com/search/repositories?q=";
         String parameter = strings[0];
         Log.d(TAG, "doInBackground: url: " + baseUrl + parameter);
 
@@ -89,6 +88,6 @@ public class APIClient extends AsyncTask<String, Integer, String> {
         super.onPostExecute(json);
         // Hide // Notify
         mProgressDialog.hide();
-        mAPIClientJson.getJson(json);
+        mAPIClientJson.parseJson(json);
     }
 }
