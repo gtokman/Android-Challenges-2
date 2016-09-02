@@ -4,10 +4,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
 
-import com.garytokman.tokmangary_ce02.Model.Athlete;
 import com.garytokman.tokmangary_ce02.Model.SaveAthlete;
-
-import java.util.List;
 
 // Gary Guerman Tokman
 // JAVA 2 1609
