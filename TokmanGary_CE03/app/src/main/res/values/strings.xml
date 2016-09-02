@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TokmanGary_CE03</string>
+
+    <string-array name="detail_type">
+        <item>Test</item>
+        <item>Test</item>
+        <item>Test</item>
+    </string-array>
 </resources>
