@@ -11,7 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.garytokman.tokmangary_ce02.Model.Athlete;
+import com.garytokman.tokmangary_ce02.Model.SaveAthlete;
 import com.garytokman.tokmangary_ce02.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // Gary Guerman Tokman
 // JAVA 2 1609
@@ -24,7 +29,7 @@ public abstract class ForumFragment extends Fragment implements TextWatcher, Vie
     protected EditText mPositionEditText;
     protected EditText mAgeEditText;
     protected EditText mCustomEditText;
-    protected Button mSaveButton;
+    protected List<Athlete> mAthletes;
 
     @Override
 
@@ -36,11 +41,20 @@ public abstract class ForumFragment extends Fragment implements TextWatcher, Vie
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        // Init
+        SaveAthlete saveAthlete = new SaveAthlete(getActivity());
+        mAthletes = saveAthlete.loadAthletes();
+
+        // Check if array list exists
+        if (mAthletes == null) {
+            mAthletes = new ArrayList<>();
+        }
+
         // Inflate fragment layout
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.form_fragment, container, false);
 
         // Init Widgets
-        mSaveButton = (Button) view.findViewById(R.id.save_button);
+        Button saveButton = (Button) view.findViewById(R.id.save_button);
         mNameEditText = (EditText) view.findViewById(R.id.name_text);
         mPositionEditText = (EditText) view.findViewById(R.id.position_text);
         mAgeEditText = (EditText) view.findViewById(R.id.age_text);
@@ -52,12 +66,12 @@ public abstract class ForumFragment extends Fragment implements TextWatcher, Vie
         mPositionEditText.addTextChangedListener(this);
         mAgeEditText.addTextChangedListener(this);
         mCustomEditText.addTextChangedListener(this);
-        mSaveButton.setOnClickListener(this);
+        saveButton.setOnClickListener(this);
 
         return view;
     }
 
-    protected void clearTextFields() {
+    void clearTextFields() {
         // Clear fields
         mNameEditText.getText().clear();
         mPositionEditText.getText().clear();

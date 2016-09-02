@@ -1,8 +1,9 @@
 package com.garytokman.tokmangary_ce02.Model;
 
-/**
- * Created by gtokman1 on 9/1/16.
- */
+// Gary Guerman Tokman
+// JAVA 2 1609
+// BasketballPlayer
+
 public class BasketballPlayer extends Athlete {
 
     private int mNumberOfThreePointers;
@@ -17,7 +18,4 @@ public class BasketballPlayer extends Athlete {
         return super.toString() + " Three pointers: " + mNumberOfThreePointers;
     }
 
-    public int getNumberOfThreePointers() {
-        return mNumberOfThreePointers;
-    }
 }

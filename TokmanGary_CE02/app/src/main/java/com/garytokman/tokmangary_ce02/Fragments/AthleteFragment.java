@@ -7,26 +7,17 @@ import android.view.View;
 import com.garytokman.tokmangary_ce02.Model.Athlete;
 import com.garytokman.tokmangary_ce02.Model.SaveAthlete;
 
-import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by gtokman1 on 9/1/16.
- */
-public class AthleteFragment extends ForumFragment {
+// Gary Guerman Tokman
+// JAVA 2 1609
+// AthleteFragment
 
-    protected List<Athlete> mAthletes;
+public class AthleteFragment extends ForumFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SaveAthlete saveAthlete = new SaveAthlete(getActivity());
-        mAthletes = saveAthlete.loadAthletes();
-
-        // Check if array list exists
-        if (mAthletes == null) {
-            mAthletes = new ArrayList<>();
-        }
 
     }
 
@@ -47,7 +38,6 @@ public class AthleteFragment extends ForumFragment {
 
     @Override
     public void afterTextChanged(Editable editable) {
-
 
     }
 

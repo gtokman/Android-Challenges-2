@@ -31,10 +31,6 @@ public class SaveAthlete {
         mFile = new File(context.getFilesDir(), FILE_NAME);
     }
 
-    public void setAthletes(List<Athlete> athletes) {
-        mAthletes = athletes;
-    }
-
     public void SaveAthletes() {
         try {
             // Create stream
@@ -62,7 +58,7 @@ public class SaveAthlete {
     public List<Athlete> loadAthletes() {
 
         // Create list
-        List<Athlete> athletes = null;
+        List<Athlete> athletes;
 
         try {
             // Create stream
