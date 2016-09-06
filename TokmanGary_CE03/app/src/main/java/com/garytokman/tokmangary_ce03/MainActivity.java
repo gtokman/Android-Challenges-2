@@ -42,15 +42,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Init
         Spinner spinner = (Spinner) findViewById(R.id.detail_spinner);
         spinner.setOnItemSelectedListener(this);
-
-        View view = findViewById(R.id.detail_container);
-        View view2 = findViewById(R.id.list_container);
-
-
         mRepositories = new ArrayList<>();
 
+        // Make API call
         APIClient apiClient = new APIClient(this);
-        apiClient.execute(Uri.encode("kotlin"));
+        apiClient.execute(Uri.encode(getString(R.string.api_parameter)));
     }
 
     @Override

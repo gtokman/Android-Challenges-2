@@ -1,11 +1,11 @@
 package com.garytokman.tokmangary_ce03.Fragments;
 
 import android.app.ListFragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.garytokman.tokmangary_ce03.Model.Repositories;
 import com.garytokman.tokmangary_ce03.Model.Repository;
@@ -17,6 +17,23 @@ import java.util.List;
 // RepoListFragment
 
 public class RepoListFragment extends ListFragment {
+
+
+    public interface LoadDetailView {
+        void getDetailData(Repository repository);
+    }
+
+    private LoadDetailView mLoadDetailView;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof LoadDetailView) {
+            mLoadDetailView = (LoadDetailView) context;
+        } else {
+            throw new IllegalArgumentException("Class does not implement interface!");
+        }
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -39,6 +56,10 @@ public class RepoListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView listView, View v, int position, long id) {
         super.onListItemClick(listView, v, position, id);
-        Toast.makeText(getActivity(), listView.getAdapter().getItem(position).toString(), Toast.LENGTH_SHORT).show();
+        // Get repo
+        Repository repository = (Repository) listView.getAdapter().getItem(position);
+
+        // Notify
+        mLoadDetailView.getDetailData(repository);
     }
 }
