@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">TokmanGary_CE03</string>
+    <string name="api_base_url">https://api.github.com/search/repositories?q=</string>
 
     <string-array name="detail_type">
         <item>Test</item>

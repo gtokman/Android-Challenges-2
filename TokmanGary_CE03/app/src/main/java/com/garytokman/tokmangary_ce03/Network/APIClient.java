@@ -5,7 +5,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.garytokman.tokmangary_ce03.R;
+
 import org.apache.commons.io.IOUtils;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,7 +24,7 @@ public class APIClient extends AsyncTask<String, Integer, String> {
     private static final String TAG = "AsyncTask";
 
     public interface APIClientJson {
-        void parseJson(String json);
+        void parseJson(String json) throws JSONException;
     }
 
     private Context mContext;
@@ -53,7 +56,7 @@ public class APIClient extends AsyncTask<String, Integer, String> {
     @Override
     protected String doInBackground(String... strings) {
 
-        String baseUrl = "https://api.github.com/search/repositories?q=";
+        String baseUrl = mContext.getString(R.string.api_base_url);
         String parameter = strings[0];
         Log.d(TAG, "doInBackground: url: " + baseUrl + parameter);
 
@@ -88,6 +91,10 @@ public class APIClient extends AsyncTask<String, Integer, String> {
         super.onPostExecute(json);
         // Hide // Notify
         mProgressDialog.hide();
-        mAPIClientJson.parseJson(json);
+        try {
+            mAPIClientJson.parseJson(json);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
