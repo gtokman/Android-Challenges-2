@@ -10,7 +10,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
 
+import com.garytokman.tokmangary_ce03.Fragments.FirstDetailFragment;
 import com.garytokman.tokmangary_ce03.Fragments.RepoListFragment;
+import com.garytokman.tokmangary_ce03.Fragments.SecondDetailFragment;
+import com.garytokman.tokmangary_ce03.Fragments.ThirdDetailFragment;
 import com.garytokman.tokmangary_ce03.Model.Repositories;
 import com.garytokman.tokmangary_ce03.Model.Repository;
 import com.garytokman.tokmangary_ce03.Network.APIClient;
@@ -26,13 +29,13 @@ import java.util.List;
 // JAV2 - 1609
 // MainActivity
 
-
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, APIClient.APIClientJson {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, APIClient.APIClientJson, RepoListFragment.LoadDetailView {
 
 
     private static final String TAG = "MainActivity";
     private static final String REPO_LIST_FRAGMENT = "Repo_List_Fragment";
-    private List<Repository> mRepositories;
+    private String selectedDetail;
+    private Repositories mRepositories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +45,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Init
         Spinner spinner = (Spinner) findViewById(R.id.detail_spinner);
         spinner.setOnItemSelectedListener(this);
-        mRepositories = new ArrayList<>();
+        mRepositories = Repositories.getInstance(this);
 
         // Make API call
-        APIClient apiClient = new APIClient(this);
-        apiClient.execute(Uri.encode(getString(R.string.api_parameter)));
+        if (mRepositories.getRepositories().isEmpty()) {
+            APIClient apiClient = new APIClient(this);
+            apiClient.execute(Uri.encode(getString(R.string.api_parameter)));
+        } else {
+            createListFragment();
+        }
+        // Init fragment
+        Log.d(TAG, "onCreate: " + selectedDetail);
+
     }
 
     @Override
@@ -59,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Log.d(TAG, "onItemSelected: " + adapterView.getSelectedItem().toString());
 
         // TODO: Update the detail with different fragments
+        selectedDetail = adapterView.getSelectedItem().toString();
+
     }
 
     @Override
@@ -67,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Parse Json
         JSONObject jsonObject = new JSONObject(json);
         JSONArray itemsArray = jsonObject.getJSONArray("items");
-        Repositories repositories = Repositories.getInstance(this);
+        List<Repository> repositories = new ArrayList<>();
 
         for (int i = 0; i < itemsArray.length(); i++) {
             JSONObject itemsDict = itemsArray.getJSONObject(i);
@@ -79,10 +91,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             Log.d(TAG, "name: " + name + " imageUrl: " + imageUrl + " lang: " + language + " stars: " + stars);
 
-            mRepositories.add(new Repository(name, imageUrl, stars, language));
+            repositories.add(new Repository(name, imageUrl, stars, language));
         }
 
-        repositories.setRepositories(mRepositories);
+        mRepositories.setRepositories(repositories);
         createListFragment();
     }
 
@@ -96,5 +108,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     .add(R.id.list_container, fragment, REPO_LIST_FRAGMENT)
                     .commit();
         }
+    }
+
+    @Override
+    public void getDetailData(Repository repository) {
+
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag(selectedDetail);
+
+        switch (selectedDetail) {
+            case "Detail 1":
+                fragment = new FirstDetailFragment().newInstance(repository);
+                break;
+            case "Detail 2":
+                fragment = new SecondDetailFragment().newInstance(repository);
+                break;
+            case "Detail 3":
+                fragment = new ThirdDetailFragment().newInstance(repository);
+                break;
+            default:
+                break;
+
+        }
+
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.detail_container, fragment, selectedDetail)
+                .addToBackStack(null).commit();
     }
 }

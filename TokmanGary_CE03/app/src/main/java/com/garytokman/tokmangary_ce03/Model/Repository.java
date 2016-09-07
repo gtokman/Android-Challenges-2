@@ -20,6 +20,22 @@ public class Repository implements Serializable {
         mLanguage = language;
     }
 
+    public String getName() {
+        return mName;
+    }
+
+    public String getImageURl() {
+        return mImageURl;
+    }
+
+    public int getStartCount() {
+        return mStartCount;
+    }
+
+    public String getLanguage() {
+        return mLanguage;
+    }
+
     @Override
     public String toString() {
         return mName;

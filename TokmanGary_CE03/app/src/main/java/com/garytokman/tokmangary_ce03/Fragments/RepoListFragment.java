@@ -23,7 +23,7 @@ public class RepoListFragment extends ListFragment {
         void getDetailData(Repository repository);
     }
 
-    private LoadDetailView mLoadDetailView;
+    public LoadDetailView mLoadDetailView;
 
     @Override
     public void onAttach(Context context) {
@@ -56,6 +56,7 @@ public class RepoListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView listView, View v, int position, long id) {
         super.onListItemClick(listView, v, position, id);
+
         // Get repo
         Repository repository = (Repository) listView.getAdapter().getItem(position);
 
