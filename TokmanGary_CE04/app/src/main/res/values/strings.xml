@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">TokmanGary_CE04</string>
+
+    <string-array name="sort_desc_1">
+        <item>Hire Date</item>
+        <item>Status</item>
+    </string-array>
+
+
+    <string-array name="sort_desc_2">
+        <item>Ascending</item>
+        <item>Descending</item>
+    </string-array>
 </resources>
