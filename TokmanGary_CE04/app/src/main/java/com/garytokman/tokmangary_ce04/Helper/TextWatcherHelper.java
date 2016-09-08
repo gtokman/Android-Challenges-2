@@ -55,7 +55,7 @@ public class TextWatcherHelper implements TextWatcher {
             }
     }
 
-    private boolean isTextValid(String text) {
+    private boolean isTextEmpty(String text) {
         return text.isEmpty();
     }
 }

@@ -9,11 +9,11 @@ import java.sql.Date;
 
 public class Person implements Serializable {
 
-    private String mFirstName;
-    private String mLastName;
-    private int mEmployeeNumber;
-    private Date mHireDate;
-    private String mEmployeeStatus;
+    private final String mFirstName;
+    private final String mLastName;
+    private final int mEmployeeNumber;
+    private final Date mHireDate;
+    private final String mEmployeeStatus;
 
     public Person(String firstName, String lastName, int employeeNumber, Date hireDate, String employeeStatus) {
         mFirstName = firstName;

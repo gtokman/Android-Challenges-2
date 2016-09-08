@@ -15,12 +15,12 @@ import com.garytokman.tokmangary_ce04.Fragments.PersonDetailFragment;
 import com.garytokman.tokmangary_ce04.Fragments.PersonFormFragment;
 import com.garytokman.tokmangary_ce04.Fragments.PersonListFragment;
 import com.garytokman.tokmangary_ce04.Fragments.SettingsFragment;
+import com.garytokman.tokmangary_ce04.Model.People;
 import com.garytokman.tokmangary_ce04.Model.Person;
 
 // Gary Tokman
 // JAV2 - 1609
 // MainActivity
-
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, PersonListFragment.OnSelectedRowClick {
 
@@ -30,10 +30,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String PERSON_FORM = "Person_Form";
     private static final String SETTINGS = "Settings";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        People people = People.getInstance(this);
 
         // Init
         Spinner employeeDescSpinner = (Spinner) findViewById(R.id.employee_details_spinner);
@@ -70,8 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int viewId = view.getId();
 
         if (viewId == R.id.settings_button) {
-            Log.d(TAG, "onClick: Click!");
-            // TODO: Show settings fragment
+
             SettingsFragment settingsFragment = new SettingsFragment();
             replaceFragment(settingsFragment, SETTINGS);
         } else if (viewId == R.id.register_button) {
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             PersonFormFragment personFormFragment = new PersonFormFragment();
             replaceFragment(personFormFragment, PERSON_FORM);
         } else if (viewId == R.id.list_button) {
+
             PersonListFragment personListFragment = new PersonListFragment();
             replaceFragment(personListFragment, LIST_FRAGMENT);
         }
@@ -89,9 +92,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // TODO: Call function to handle the selection
         if (adapterView.getId() == R.id.employee_details_spinner) {
+
             String selection = adapterView.getSelectedItem().toString();
             Log.d(TAG, "onItemSelected: First Spinner " + selection);
         } else if (adapterView.getId() == R.id.order_spinner) {
+
             String selection = adapterView.getSelectedItem().toString();
             Log.d(TAG, "onItemSelected: Second selection" + selection);
         }
