@@ -3,19 +3,25 @@ package com.garytokman.tokmangary_ce04.Fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.garytokman.tokmangary_ce04.Helper.TextWatcherHelper;
+import com.garytokman.tokmangary_ce04.Model.Person;
 import com.garytokman.tokmangary_ce04.R;
 
 // Gary Tokman
 // JAV2 - 1609
 // PersonListFragment
 
-public class PersonFormFragment extends Fragment {
+public class PersonFormFragment extends Fragment implements View.OnClickListener {
+
+    private static final String TAG = "FormFragment";
+    public static final Person person = new Person();
 
     @Nullable
     @Override
@@ -29,6 +35,8 @@ public class PersonFormFragment extends Fragment {
         EditText employeeNumber = (EditText) view.findViewById(R.id.number_text);
         EditText hireDate = (EditText) view.findViewById(R.id.hire_text);
         EditText employeeStatus = (EditText) view.findViewById(R.id.status_text);
+        Button addButton = (Button) view.findViewById(R.id.add_button);
+        addButton.setOnClickListener(this);
 
         // Set text watcher
         setTextWatcher(firstName);
@@ -45,5 +53,13 @@ public class PersonFormFragment extends Fragment {
 
         editText.addTextChangedListener(watcherHelper);
         watcherHelper.setEditText(editText);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.add_button) {
+            Log.d(TAG, "onClick: ");
+            Log.d(TAG, "onClick: " + person.getFirstName() + " " + person.getLastName());
+        }
     }
 }

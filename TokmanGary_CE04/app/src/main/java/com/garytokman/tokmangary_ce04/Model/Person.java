@@ -9,11 +9,11 @@ import java.util.Date;
 
 public class Person implements Serializable {
 
-    private final String mFirstName;
-    private final String mLastName;
-    private final int mEmployeeNumber;
-    private final Date mHireDate;
-    private final String mEmployeeStatus;
+    private String mFirstName;
+    private String mLastName;
+    private int mEmployeeNumber;
+    private Date mHireDate;
+    private String mEmployeeStatus;
 
     public Person(String firstName, String lastName, int employeeNumber, Date hireDate, String employeeStatus) {
         mFirstName = firstName;
@@ -22,6 +22,8 @@ public class Person implements Serializable {
         mHireDate = hireDate;
         mEmployeeStatus = employeeStatus;
     }
+
+    public Person() {}
 
     @Override
     public String toString() {
@@ -50,5 +52,25 @@ public class Person implements Serializable {
 
     public String getEmployeeStatus() {
         return mEmployeeStatus;
+    }
+
+    public void setFirstName(String firstName) {
+        mFirstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        mLastName = lastName;
+    }
+
+    public void setEmployeeNumber(int employeeNumber) {
+        mEmployeeNumber = employeeNumber;
+    }
+
+    public void setHireDate(Date hireDate) {
+        mHireDate = hireDate;
+    }
+
+    public void setEmployeeStatus(String employeeStatus) {
+        mEmployeeStatus = employeeStatus;
     }
 }

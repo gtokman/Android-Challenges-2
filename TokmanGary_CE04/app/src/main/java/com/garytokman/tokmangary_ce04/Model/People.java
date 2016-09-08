@@ -11,9 +11,9 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.garytokman.tokmangary_ce04.Database.PersonDatabase;
 import com.garytokman.tokmangary_ce04.Database.PersonDatabaseSchema.PersonTable;
+import com.garytokman.tokmangary_ce04.Helper.DateHelper;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class People {
@@ -55,7 +55,7 @@ public class People {
         String status = cursor.getString(cursor.getColumnIndex(PersonTable.Columns.STATUS));
 
 
-        return new Person(firstName, lastName, number, new Date(hireDate * 1000), status);
+        return new Person(firstName, lastName, number, DateHelper.longToDate(hireDate), status);
     }
 
     public void deletePerson(Person person, String where, String[] whereArgs) {

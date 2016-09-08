@@ -15,8 +15,11 @@ import com.garytokman.tokmangary_ce04.Fragments.PersonDetailFragment;
 import com.garytokman.tokmangary_ce04.Fragments.PersonFormFragment;
 import com.garytokman.tokmangary_ce04.Fragments.PersonListFragment;
 import com.garytokman.tokmangary_ce04.Fragments.SettingsFragment;
-import com.garytokman.tokmangary_ce04.Model.People;
+import com.garytokman.tokmangary_ce04.Helper.DateHelper;
 import com.garytokman.tokmangary_ce04.Model.Person;
+
+import java.text.ParseException;
+import java.util.Date;
 
 // Gary Tokman
 // JAV2 - 1609
@@ -36,7 +39,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        People people = People.getInstance(this);
+//        People people = People.getInstance(this);
+        try {
+           Date date =  DateHelper.stringToDate("09/08/2016");
+            Log.d(TAG, "onCreate: " + date.toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         // Init
         Spinner employeeDescSpinner = (Spinner) findViewById(R.id.employee_details_spinner);
