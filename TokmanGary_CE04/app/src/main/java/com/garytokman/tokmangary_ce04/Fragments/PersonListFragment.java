@@ -2,16 +2,15 @@ package com.garytokman.tokmangary_ce04.Fragments;
 
 import android.app.ListFragment;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 
+import com.garytokman.tokmangary_ce04.Database.PersonDatabaseSchema.PersonTable;
+import com.garytokman.tokmangary_ce04.Model.People;
 import com.garytokman.tokmangary_ce04.Model.Person;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 // Gary Tokman
 // JAV2 - 1609
@@ -40,22 +39,22 @@ public class PersonListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        List<Person> personList = new ArrayList<>();
-        Date date = new Date();
-        for (int i = 0; i < 10; i++) {
-            personList.add(new Person("Gary", "Tokman", 3, date , "FullTime"));
-        }
+        // Create adapter
+        Cursor cursor = People.getInstance(getActivity()).queryAllPeople(null, null);
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_2,
+                cursor, new String[]{PersonTable.Columns.FIRSTNAME, PersonTable.Columns.STATUS },
+                new int[]{android.R.id.text1, android.R.id.text2}, 1);
 
-        ArrayAdapter<Person> arrayAdapter = new ArrayAdapter<Person>(getActivity(), android.R.layout.simple_list_item_1, personList);
-        setListAdapter(arrayAdapter);
-
+        // Set adapter
+        setListAdapter(adapter);
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         // Get person
-        Person person = (Person) l.getAdapter().getItem(position);
+        Cursor personCursor = (Cursor) l.getAdapter().getItem(position);
+        Person person = People.getInstance(getActivity()).getPerson(personCursor);
 
         // Notify person selected
         mOnSelectedRowClick.getSelectedPerson(person);

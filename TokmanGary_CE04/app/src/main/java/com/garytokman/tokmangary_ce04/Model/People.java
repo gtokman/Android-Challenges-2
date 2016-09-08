@@ -72,7 +72,7 @@ public class People {
                 new String[]{employeeId});
     }
 
-    private Cursor queryAllPeople(String where, String[] whereArgs) {
+    public Cursor queryAllPeople(String where, String[] whereArgs) {
 
         // Table name, all columns = null, where, whereARgs, group by, having, order by
         return mDatabase.query(

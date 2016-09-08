@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.garytokman.tokmangary_ce04.Helper.TextWatcherHelper;
+import com.garytokman.tokmangary_ce04.Model.People;
 import com.garytokman.tokmangary_ce04.Model.Person;
 import com.garytokman.tokmangary_ce04.R;
 
@@ -59,7 +60,11 @@ public class PersonFormFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         if (view.getId() == R.id.add_button) {
             Log.d(TAG, "onClick: ");
-            Log.d(TAG, "onClick: " + person.getFirstName() + " " + person.getLastName());
+            Log.d(TAG, "onClick: " + person.getFirstName() + " " + person.getLastName() + " " + person.getEmployeeNumber()
+            + " " + person.getHireDate() + " " + person.getEmployeeStatus());
+
+            // TODO: Check for null fields
+            People.getInstance(getActivity()).addPeople(person);
         }
     }
 }
