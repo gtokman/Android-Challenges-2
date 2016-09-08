@@ -5,6 +5,7 @@
     <string name="employee_number_hint">Employee number</string>
     <string name="hire_date_hint">Hire date</string>
     <string name="status_hint">Status</string>
+    <string name="register_button">Register</string>
 
     <string-array name="sort_desc_1">
         <item>Hire Date</item>

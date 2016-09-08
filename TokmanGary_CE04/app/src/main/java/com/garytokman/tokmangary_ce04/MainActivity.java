@@ -2,11 +2,12 @@ package com.garytokman.tokmangary_ce04;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         orderSpinner.setOnItemSelectedListener(this);
         ImageButton settingsButton = (ImageButton) findViewById(R.id.settings_button);
         settingsButton.setOnClickListener(this);
+        Button registerButton = (Button) findViewById(R.id.register_button);
+        registerButton.setOnClickListener(this);
 
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag(LIST_FRAGMENT);
@@ -48,24 +51,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fragment = new PersonListFragment();
             fragmentManager
                     .beginTransaction()
-                    .add(R.id.list_container, fragment, LIST_FRAGMENT)
+                    .add(R.id.custom_container, fragment, LIST_FRAGMENT)
                     .commit();
         }
-
-        PersonFormFragment personFormFragment = new PersonFormFragment();
-        SettingsFragment settingsFragment = new SettingsFragment();
-        fragmentManager
-                .beginTransaction()
-                .add(R.id.custom_container, settingsFragment, PERSON_FORM)
-                .commit();
-
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.settings_button) {
+
+        FragmentManager fragmentManager = getFragmentManager();
+        int viewId = view.getId();
+
+        if (viewId == R.id.settings_button) {
             Log.d(TAG, "onClick: Click!");
             // TODO: Show settings fragment
+            SettingsFragment settingsFragment = new SettingsFragment();
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.custom_container, settingsFragment, PERSON_FORM)
+                    .commit();
+        } else if (viewId == R.id.register_button) {
+
+            PersonFormFragment personFormFragment = new PersonFormFragment();
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.custom_container, personFormFragment, PERSON_FORM)
+                    .commit();
         }
     }
 
