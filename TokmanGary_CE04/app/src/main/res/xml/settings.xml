@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+   <PreferenceCategory android:title="Demo" >
+
+       <Preference
+           android:key="CLICK"
+           android:summary="Click me"
+           android:title="Click pref"
+           />
+
+       <ListPreference
+           android:key="PREF_LIST"
+           android:summary="A preference that shows a list of values"
+           android:title="List Preference"
+           android:entries="@array/sort_desc_1"
+           android:entryValues="@array/sort_desc_1"
+           android:defaultValue="Item 1" />
+
+   </PreferenceCategory>
+
+</PreferenceScreen>

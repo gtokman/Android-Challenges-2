@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import com.garytokman.tokmangary_ce04.Fragments.PersonDetailFragment;
 import com.garytokman.tokmangary_ce04.Fragments.PersonFormFragment;
 import com.garytokman.tokmangary_ce04.Fragments.PersonListFragment;
+import com.garytokman.tokmangary_ce04.Fragments.SettingsFragment;
 import com.garytokman.tokmangary_ce04.Model.Person;
 
 // Gary Tokman
@@ -52,9 +53,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         PersonFormFragment personFormFragment = new PersonFormFragment();
+        SettingsFragment settingsFragment = new SettingsFragment();
         fragmentManager
                 .beginTransaction()
-                .add(R.id.custom_container, personFormFragment, PERSON_FORM)
+                .add(R.id.custom_container, settingsFragment, PERSON_FORM)
                 .commit();
 
     }
