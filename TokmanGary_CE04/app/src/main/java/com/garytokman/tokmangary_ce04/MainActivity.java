@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "MainActivity";
     private static final String PERSON_DETAIL = "Person_Detail";
     private static final String PERSON_FORM = "Person_Form";
+    private static final String SETTINGS = "Settings";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,40 +44,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         settingsButton.setOnClickListener(this);
         Button registerButton = (Button) findViewById(R.id.register_button);
         registerButton.setOnClickListener(this);
+        Button listButton = (Button) findViewById(R.id.list_button);
+        listButton.setOnClickListener(this);
 
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag(LIST_FRAGMENT);
 
         if (fragment == null) {
             fragment = new PersonListFragment();
-            fragmentManager
-                    .beginTransaction()
-                    .add(R.id.custom_container, fragment, LIST_FRAGMENT)
-                    .commit();
+            replaceFragment(fragment, LIST_FRAGMENT);
         }
+    }
+
+    private void replaceFragment(Fragment fragment, String tag) {
+        FragmentManager fragmentManager = getFragmentManager();
+
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.custom_container, fragment, tag)
+                .commit();
     }
 
     @Override
     public void onClick(View view) {
-
-        FragmentManager fragmentManager = getFragmentManager();
         int viewId = view.getId();
 
         if (viewId == R.id.settings_button) {
             Log.d(TAG, "onClick: Click!");
             // TODO: Show settings fragment
             SettingsFragment settingsFragment = new SettingsFragment();
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.custom_container, settingsFragment, PERSON_FORM)
-                    .commit();
+            replaceFragment(settingsFragment, SETTINGS);
         } else if (viewId == R.id.register_button) {
 
             PersonFormFragment personFormFragment = new PersonFormFragment();
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.custom_container, personFormFragment, PERSON_FORM)
-                    .commit();
+            replaceFragment(personFormFragment, PERSON_FORM);
+        } else if (viewId == R.id.list_button) {
+            PersonListFragment personListFragment = new PersonListFragment();
+            replaceFragment(personListFragment, LIST_FRAGMENT);
         }
     }
 
@@ -101,14 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void getSelectedPerson(Person person) {
         Log.d(TAG, "getSelectedPerson() called with: " + "person = [" + person + "]");
-
-        FragmentManager fragmentManager = getFragmentManager();
+        // Add detail fragments
         PersonDetailFragment personDetailFragment = new PersonDetailFragment().newInstance(person);
-
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.custom_container, personDetailFragment, PERSON_DETAIL)
-                .addToBackStack(null)
-                .commit();
+        replaceFragment(personDetailFragment, PERSON_DETAIL);
     }
 }

@@ -42,6 +42,7 @@ public class TextWatcherHelper implements TextWatcher {
                     break;
                 case R.id.lastname_text:
                     Log.d(TAG, "Last name " + text);
+                    break;
                 case R.id.number_text:
                     Log.d(TAG, "Number" + text);
                     break;
@@ -50,10 +51,11 @@ public class TextWatcherHelper implements TextWatcher {
                     break;
                 case R.id.status_text:
                     Log.d(TAG, "Status " + text);
+                    break;
             }
     }
 
     private boolean isTextValid(String text) {
-        return !text.contains("");
+        return text.isEmpty();
     }
 }

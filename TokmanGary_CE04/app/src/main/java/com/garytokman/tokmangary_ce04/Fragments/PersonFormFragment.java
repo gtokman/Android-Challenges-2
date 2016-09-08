@@ -42,6 +42,7 @@ public class PersonFormFragment extends Fragment {
 
     private void setTextWatcher(EditText editText) {
         TextWatcherHelper watcherHelper = new TextWatcherHelper();
+
         editText.addTextChangedListener(watcherHelper);
         watcherHelper.setEditText(editText);
     }
