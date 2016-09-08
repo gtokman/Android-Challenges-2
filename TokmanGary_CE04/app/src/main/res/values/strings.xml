@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">TokmanGary_CE04</string>
+    <string name="first_name_hint">First name</string>
+    <string name="last_name_hint">Last name</string>
+    <string name="employee_number_hint">Employee number</string>
+    <string name="hire_date_hint">Hire date</string>
+    <string name="status_hint">Status</string>
 
     <string-array name="sort_desc_1">
         <item>Hire Date</item>

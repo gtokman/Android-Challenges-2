@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import com.garytokman.tokmangary_ce04.Fragments.PersonDetailFragment;
+import com.garytokman.tokmangary_ce04.Fragments.PersonFormFragment;
 import com.garytokman.tokmangary_ce04.Fragments.PersonListFragment;
 import com.garytokman.tokmangary_ce04.Model.Person;
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String LIST_FRAGMENT = "List_Fragment";
     private static final String TAG = "MainActivity";
     private static final String PERSON_DETAIL = "Person_Detail";
+    private static final String PERSON_FORM = "Person_Form";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .add(R.id.list_container, fragment, LIST_FRAGMENT)
                     .commit();
         }
+
+        PersonFormFragment personFormFragment = new PersonFormFragment();
+        fragmentManager
+                .beginTransaction()
+                .add(R.id.custom_container, personFormFragment, PERSON_FORM)
+                .commit();
+
     }
 
     @Override
