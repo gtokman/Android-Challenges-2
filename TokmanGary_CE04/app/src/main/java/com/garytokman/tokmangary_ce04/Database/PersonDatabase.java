@@ -25,7 +25,6 @@ public class PersonDatabase extends SQLiteOpenHelper {
             PersonTable.Columns.STATUS + " text" + ")";
     private static final String TAG = "PersonDB";
 
-
     public PersonDatabase(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }

@@ -52,7 +52,7 @@ public class PersonDetailFragment extends Fragment {
         if (person != null) {
             personName.setText(person.getFullName());
             personNumber.setText(String.valueOf(person.getEmployeeNumber()));
-            personHireDate.setText("01/23/2016");
+            personHireDate.setText(person.getHireDate().toString());
             personStatus.setText(person.getEmployeeStatus());
         }
 

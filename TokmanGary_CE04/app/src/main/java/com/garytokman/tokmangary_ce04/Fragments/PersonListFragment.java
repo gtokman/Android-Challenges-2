@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.garytokman.tokmangary_ce04.Model.Person;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 // Gary Tokman
@@ -40,8 +41,9 @@ public class PersonListFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         List<Person> personList = new ArrayList<>();
+        Date date = new Date();
         for (int i = 0; i < 10; i++) {
-            personList.add(new Person("Gary", "Tokman", 3, null, "FullTime"));
+            personList.add(new Person("Gary", "Tokman", 3, date , "FullTime"));
         }
 
         ArrayAdapter<Person> arrayAdapter = new ArrayAdapter<Person>(getActivity(), android.R.layout.simple_list_item_1, personList);
