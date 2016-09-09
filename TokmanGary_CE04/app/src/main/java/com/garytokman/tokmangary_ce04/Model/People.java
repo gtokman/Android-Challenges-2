@@ -13,13 +13,11 @@ import com.garytokman.tokmangary_ce04.Database.PersonDatabase;
 import com.garytokman.tokmangary_ce04.Database.PersonDatabaseSchema.PersonTable;
 import com.garytokman.tokmangary_ce04.Helper.DateHelper;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.garytokman.tokmangary_ce04.Fragments.PersonFormFragment.*;
 
 public class People {
     private static People sPeople;
-    private Context mContext;
-    private SQLiteDatabase mDatabase;
+    private final SQLiteDatabase mDatabase;
 
     public static People getInstance(Context context) {
         if (sPeople == null) {
@@ -30,17 +28,12 @@ public class People {
     }
 
     private People(Context context) {
-        mContext = context.getApplicationContext();
         mDatabase = new PersonDatabase(context).getWritableDatabase();
     }
 
-    public List<Person> getPeople() {
-        return new ArrayList<>();
-    }
-
-    public void addPeople(Person person) {
+    public void addPeople() {
         // Get ContentValues
-        ContentValues contentValues = getContentValues(person);
+        ContentValues contentValues = getContentValues();
 
         // Insert person
         mDatabase.insert(PersonTable.NAME, null, contentValues);
@@ -58,38 +51,27 @@ public class People {
         return new Person(firstName, lastName, number, DateHelper.longToDate(hireDate), status);
     }
 
-    public void deletePerson(Person person, String where, String[] whereArgs) {
+    public void deletePerson(String where, String[] whereArgs) {
         mDatabase.delete(PersonTable.NAME, where, whereArgs);
     }
 
-    public void updatePeople(Person person) {
-        // Update by unique employee id
-        String employeeId = String.valueOf(person.getEmployeeNumber());
-        ContentValues contentValues = getContentValues(person);
-
-        mDatabase.update(PersonTable.NAME, contentValues,
-                PersonTable.Columns.EMPLOYEE_ID + " = ?",
-                new String[]{employeeId});
-    }
-
-    public Cursor queryAllPeople(String where, String[] whereArgs) {
+    public Cursor queryAllPeople() {
 
         // Table name, all columns = null, where, whereARgs, group by, having, order by
         return mDatabase.query(
                 PersonTable.NAME,
                 null,
-                where,
-                whereArgs,
+                null,
+                null,
                 null,
                 null,
                 null
         );
-
     }
 
-    private static ContentValues getContentValues(Person person) {
+    private static ContentValues getContentValues() {
         ContentValues contentValues = new ContentValues();
-        // TODO: Convert date
+
         contentValues.put(PersonTable.Columns.FIRSTNAME, person.getFirstName());
         contentValues.put(PersonTable.Columns.LASTNAME, person.getLastName());
         contentValues.put(PersonTable.Columns.EMPLOYEE_ID, person.getEmployeeNumber());
@@ -98,6 +80,4 @@ public class People {
 
         return contentValues;
     }
-
-
 }

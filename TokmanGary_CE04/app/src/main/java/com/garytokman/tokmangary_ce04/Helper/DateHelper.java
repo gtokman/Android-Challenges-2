@@ -11,8 +11,6 @@ import java.util.Locale;
 
 public class DateHelper {
 
-    private static final String TAG = "DateHelper";
-
     public static Date stringToDate(String date) throws ParseException {
         String pattern = "MM/dd/yyyy";
         SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.US);

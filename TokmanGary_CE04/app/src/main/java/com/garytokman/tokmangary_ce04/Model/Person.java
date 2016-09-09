@@ -23,7 +23,8 @@ public class Person implements Serializable {
         mEmployeeStatus = employeeStatus;
     }
 
-    public Person() {}
+    public Person() {
+    }
 
     @Override
     public String toString() {

@@ -42,26 +42,26 @@ public class TextWatcherHelper implements TextWatcher {
             switch (mEditText.getId()) {
                 case R.id.firstname_text:
                     Log.d(TAG, "First name" + text);
-                    if (!isTextEmpty(text)) {
+                    if (isTextNotEmpty(text)) {
                         PersonFormFragment.person.setFirstName(text);
                     }
                     break;
                 case R.id.lastname_text:
                     Log.d(TAG, "Last name " + text);
-                    if (!isTextEmpty(text)) {
+                    if (isTextNotEmpty(text)) {
                         PersonFormFragment.person.setLastName(text);
                     }
                     break;
                 case R.id.number_text:
                     Log.d(TAG, "Number" + text);
-                    if (!isTextEmpty(text)) {
+                    if (isTextNotEmpty(text)) {
                         PersonFormFragment.person.setEmployeeNumber(Integer.valueOf(text));
                     }
                     break;
                 case R.id.hire_text:
                     Log.d(TAG, "Hire date " + text);
                     try {
-                        if (!isTextEmpty(text)) {
+                        if (isTextNotEmpty(text)) {
                             PersonFormFragment.person.setHireDate(DateHelper.stringToDate(text));
                         }
                     } catch (ParseException e) {
@@ -70,7 +70,7 @@ public class TextWatcherHelper implements TextWatcher {
                     break;
                 case R.id.status_text:
                     Log.d(TAG, "Status " + text);
-                    if (!isTextEmpty(text)) {
+                    if (isTextNotEmpty(text)) {
                         PersonFormFragment.person.setEmployeeStatus(text);
                     }
                     break;
@@ -78,9 +78,7 @@ public class TextWatcherHelper implements TextWatcher {
 
     }
 
-    private boolean isTextEmpty(String text) {
-        return text.isEmpty();
+    private boolean isTextNotEmpty(String text) {
+        return !text.isEmpty();
     }
-
-
 }

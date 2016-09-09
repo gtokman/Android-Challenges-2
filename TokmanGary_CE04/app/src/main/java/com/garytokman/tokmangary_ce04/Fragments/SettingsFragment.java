@@ -53,7 +53,7 @@ public class SettingsFragment extends PreferenceFragment {
                 alert.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        People.getInstance(getActivity()).deletePerson(null, null, null);
+                        People.getInstance(getActivity()).deletePerson(null, null);
                     }
                 });
                 alert.setNegativeButton("Cancel", null);

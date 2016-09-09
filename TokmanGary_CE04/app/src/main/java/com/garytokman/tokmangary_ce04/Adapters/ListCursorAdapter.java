@@ -18,8 +18,8 @@ import com.garytokman.tokmangary_ce04.R;
 
 public class ListCursorAdapter extends CursorAdapter {
 
-    public ListCursorAdapter(Context context, Cursor c, int flags) {
-        super(context, c, flags);
+    public ListCursorAdapter(Context context, Cursor c) {
+        super(context, c, 1);
     }
 
     @Override
@@ -38,9 +38,9 @@ public class ListCursorAdapter extends CursorAdapter {
     }
 
     private static class ViewHolder {
-        TextView firstName;
-        TextView lastName;
-        TextView status;
+        final TextView firstName;
+        final TextView lastName;
+        final TextView status;
 
         public ViewHolder(View view) {
             firstName = (TextView) view.findViewById(R.id.first_name_text);

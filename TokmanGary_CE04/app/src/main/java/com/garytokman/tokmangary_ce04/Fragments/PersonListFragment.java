@@ -39,10 +39,10 @@ public class PersonListFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         // Get people
-        Cursor cursor = People.getInstance(getActivity()).queryAllPeople(null, null);
+        Cursor cursor = People.getInstance(getActivity()).queryAllPeople();
 
         // Create adapter
-        ListCursorAdapter listCursorAdapter = new ListCursorAdapter(getActivity(), cursor, 1);
+        ListCursorAdapter listCursorAdapter = new ListCursorAdapter(getActivity(), cursor);
         setListAdapter(listCursorAdapter);
     }
 

@@ -2,9 +2,9 @@
     <string name="app_name">TokmanGary_CE04</string>
     <string name="first_name_hint">First name</string>
     <string name="last_name_hint">Last name</string>
-    <string name="employee_number_hint">Employee number</string>
-    <string name="hire_date_hint">Hire date</string>
-    <string name="status_hint">Status</string>
+    <string name="employee_number_hint">Employee number ex: 1</string>
+    <string name="hire_date_hint">Hire date ex: MM/DD/YYYY</string>
+    <string name="status_hint">Status ex: Full time</string>
     <string name="register_button">Register Form</string>
     <string name="delete_summary">Delete all people in the list.</string>
     <string name="delete_title">Delete all</string>

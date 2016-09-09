@@ -35,14 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        People people = People.getInstance(this);
-//        try {
-//           Date date =  DateHelper.stringToDate("09/08/2016");
-//            Log.d(TAG, "onCreate: " + date.toString());
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-
         // Init
         Spinner employeeDescSpinner = (Spinner) findViewById(R.id.employee_details_spinner);
         employeeDescSpinner.setOnItemSelectedListener(this);
@@ -54,14 +46,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         registerButton.setOnClickListener(this);
         Button listButton = (Button) findViewById(R.id.list_button);
         listButton.setOnClickListener(this);
+        // Launch list
+        PersonListFragment listFragment = new PersonListFragment();
 
-        FragmentManager fragmentManager = getFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag(LIST_FRAGMENT);
+        replaceFragment(listFragment, LIST_FRAGMENT);
 
-        if (fragment == null) {
-            fragment = new PersonListFragment();
-            replaceFragment(fragment, LIST_FRAGMENT);
-        }
     }
 
     private void replaceFragment(Fragment fragment, String tag) {
@@ -86,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             PersonFormFragment personFormFragment = new PersonFormFragment();
             replaceFragment(personFormFragment, PERSON_FORM);
+
         } else if (viewId == R.id.list_button) {
 
             PersonListFragment personListFragment = new PersonListFragment();

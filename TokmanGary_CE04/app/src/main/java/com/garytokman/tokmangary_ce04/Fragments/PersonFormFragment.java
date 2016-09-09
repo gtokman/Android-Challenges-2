@@ -61,29 +61,24 @@ public class PersonFormFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         if (view.getId() == R.id.add_button) {
             Log.d(TAG, "onClick: " + person.getFirstName() + " " + person.getLastName() + " " + person.getEmployeeNumber()
-            + " " + person.getHireDate() + " " + person.getEmployeeStatus());
+                    + " " + person.getHireDate() + " " + person.getEmployeeStatus());
 
             if (isValidPerson()) {
-                People.getInstance(getActivity()).addPeople(person);
+                People.getInstance(getActivity()).addPeople();
                 getFragmentManager().popBackStack();
                 Toast.makeText(getActivity(), "User added!", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(getActivity(), "No empty fields!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "No empty fields! or format date", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private boolean isValidPerson() {
-
-        if ((person.getFirstName() == null && person.getLastName() == null &&
+        return !((person.getFirstName() == null && person.getLastName() == null &&
                 person.getEmployeeNumber() == 0 && person.getHireDate() == null &&
                 person.getEmployeeStatus() == null) ||
-        (person.getFirstName() == null || person.getLastName() == null ||
-                person.getEmployeeNumber() == 0 || person.getHireDate() == null ||
-                person.getEmployeeStatus() == null)) {
-            return false;
-        }
-
-        return true;
+                (person.getFirstName() == null || person.getLastName() == null ||
+                        person.getEmployeeNumber() == 0 || person.getHireDate() == null ||
+                        person.getEmployeeStatus() == null));
     }
 }
