@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.garytokman.tokmangary_ce04.Helper.TextWatcherHelper;
 import com.garytokman.tokmangary_ce04.Model.People;
@@ -59,12 +60,28 @@ public class PersonFormFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.add_button) {
-            Log.d(TAG, "onClick: ");
             Log.d(TAG, "onClick: " + person.getFirstName() + " " + person.getLastName() + " " + person.getEmployeeNumber()
             + " " + person.getHireDate() + " " + person.getEmployeeStatus());
 
-            // TODO: Check for null fields
-            People.getInstance(getActivity()).addPeople(person);
+            if (isValidPerson()) {
+                People.getInstance(getActivity()).addPeople(person);
+            } else {
+                Toast.makeText(getActivity(), "No empty fields!", Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    private boolean isValidPerson() {
+
+        if ((person.getFirstName() == null && person.getLastName() == null &&
+                person.getEmployeeNumber() == 0 && person.getHireDate() == null &&
+                person.getEmployeeStatus() == null) ||
+        (person.getFirstName() == null || person.getLastName() == null ||
+                person.getEmployeeNumber() == 0 || person.getHireDate() == null ||
+                person.getEmployeeStatus() == null)) {
+            return false;
+        }
+
+        return true;
     }
 }

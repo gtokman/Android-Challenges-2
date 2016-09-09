@@ -10,14 +10,18 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.garytokman.tokmangary_ce04.Database.PersonDatabaseSchema.PersonTable;
+import com.garytokman.tokmangary_ce04.Model.People;
 import com.garytokman.tokmangary_ce04.Model.Person;
 import com.garytokman.tokmangary_ce04.R;
 
 public class PersonDetailFragment extends Fragment {
 
     private static final String PERSON_DATA = "Person_Data";
+    private static final String TAG = "PersonDetail";
 
     public PersonDetailFragment newInstance(Person person) {
 
@@ -44,10 +48,12 @@ public class PersonDetailFragment extends Fragment {
         TextView personNumber = (TextView) view.findViewById(R.id.person_number);
         TextView personHireDate = (TextView) view.findViewById(R.id.person_hire_date);
         TextView personStatus = (TextView) view.findViewById(R.id.person_status);
+        Button deleteButton = (Button) view.findViewById(R.id.delete_person_button);
+
 
         // Get arguments
         Bundle arguments = getArguments();
-        Person person = (Person) arguments.getSerializable(PERSON_DATA);
+        final Person person = (Person) arguments.getSerializable(PERSON_DATA);
 
         if (person != null) {
             personName.setText(person.getFullName());
@@ -56,6 +62,18 @@ public class PersonDetailFragment extends Fragment {
             personStatus.setText(person.getEmployeeStatus());
         }
 
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String searchValue = String.valueOf(person != null ? person.getEmployeeNumber() : 0);
+                People.getInstance(getActivity()).deletePerson(null,
+                        PersonTable.Columns.EMPLOYEE_ID + " = ?" , new String[] {searchValue});
+
+                getFragmentManager().popBackStackImmediate();
+            }
+        });
+
         return view;
     }
+
 }

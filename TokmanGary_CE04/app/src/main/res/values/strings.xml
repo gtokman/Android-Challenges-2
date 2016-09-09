@@ -5,7 +5,12 @@
     <string name="employee_number_hint">Employee number</string>
     <string name="hire_date_hint">Hire date</string>
     <string name="status_hint">Status</string>
-    <string name="register_button">Register</string>
+    <string name="register_button">Register Form</string>
+    <string name="delete_summary">Delete all people in the list.</string>
+    <string name="delete_title">Delete all</string>
+    <string name="list_summary">Change the date format of the employees.</string>
+    <string name="date_title">Change date style</string>
+    <string name="default_value">Date option 1</string>
 
     <string-array name="sort_desc_1">
         <item>Hire Date</item>
@@ -16,5 +21,17 @@
     <string-array name="sort_desc_2">
         <item>Ascending</item>
         <item>Descending</item>
+    </string-array>
+
+    <string-array name="date_list">
+        <item>Date option 1</item>
+        <item>Date option 2</item>
+        <item>Date option 3</item>
+    </string-array>
+
+    <string-array name="date_values">
+        <item>EEEE, MMM d, yyyy</item>
+        <item>MM/dd/yyyy</item>
+        <item>MMM d, yyyy</item>
     </string-array>
 </resources>

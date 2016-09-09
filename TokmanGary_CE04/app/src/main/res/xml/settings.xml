@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-   <PreferenceCategory android:title="Demo" >
+   <PreferenceCategory android:title="Settings" >
 
        <Preference
-           android:key="CLICK"
-           android:summary="Click me"
-           android:title="Click pref"
+           android:key="DELETE_BUTTON"
+           android:summary="@string/delete_summary"
+           android:title="@string/delete_title"
            />
 
        <ListPreference
-           android:key="PREF_LIST"
-           android:summary="A preference that shows a list of values"
-           android:title="List Preference"
-           android:entries="@array/sort_desc_1"
-           android:entryValues="@array/sort_desc_1"
-           android:defaultValue="Item 1" />
+           android:key="DATE_PREF"
+           android:summary="@string/list_summary"
+           android:title="@string/date_title"
+           android:entries="@array/date_list"
+           android:entryValues="@array/date_values"
+           android:defaultValue="@string/default_value" />
 
    </PreferenceCategory>
 

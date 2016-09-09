@@ -6,9 +6,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
-import com.garytokman.tokmangary_ce04.Database.PersonDatabaseSchema.PersonTable;
+import com.garytokman.tokmangary_ce04.Adapters.ListCursorAdapter;
 import com.garytokman.tokmangary_ce04.Model.People;
 import com.garytokman.tokmangary_ce04.Model.Person;
 
@@ -39,14 +38,12 @@ public class PersonListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // Create adapter
+        // Get people
         Cursor cursor = People.getInstance(getActivity()).queryAllPeople(null, null);
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_2,
-                cursor, new String[]{PersonTable.Columns.FIRSTNAME, PersonTable.Columns.STATUS },
-                new int[]{android.R.id.text1, android.R.id.text2}, 1);
 
-        // Set adapter
-        setListAdapter(adapter);
+        // Create adapter
+        ListCursorAdapter listCursorAdapter = new ListCursorAdapter(getActivity(), cursor, 1);
+        setListAdapter(listCursorAdapter);
     }
 
     @Override

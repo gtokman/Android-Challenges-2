@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentManager
                 .beginTransaction()
                 .replace(R.id.custom_container, fragment, tag)
+                .addToBackStack(null)
                 .commit();
     }
 
