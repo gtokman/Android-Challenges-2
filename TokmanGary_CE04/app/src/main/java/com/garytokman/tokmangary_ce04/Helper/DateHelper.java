@@ -12,12 +12,19 @@ import java.util.Locale;
 public class DateHelper {
 
     private static final String TAG = "DateHelper";
-    private static final String PATTERN1 = "MM/dd/yyyy";
 
     public static Date stringToDate(String date) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat(PATTERN1, Locale.US);
+        String pattern = "MM/dd/yyyy";
+        SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.US);
 
         return format.parse(date);
+    }
+
+    public static String newDateFormat(Date date, String pattern) {
+
+        SimpleDateFormat format = new SimpleDateFormat(pattern, Locale.US);
+
+        return format.format(date);
     }
 
     public static Date longToDate(long date) {

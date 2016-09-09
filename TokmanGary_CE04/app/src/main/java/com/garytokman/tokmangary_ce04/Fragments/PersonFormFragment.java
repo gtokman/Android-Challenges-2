@@ -65,6 +65,8 @@ public class PersonFormFragment extends Fragment implements View.OnClickListener
 
             if (isValidPerson()) {
                 People.getInstance(getActivity()).addPeople(person);
+                getFragmentManager().popBackStack();
+                Toast.makeText(getActivity(), "User added!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "No empty fields!", Toast.LENGTH_SHORT).show();
             }

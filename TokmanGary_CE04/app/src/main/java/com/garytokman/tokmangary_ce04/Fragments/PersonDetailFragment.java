@@ -5,8 +5,11 @@ package com.garytokman.tokmangary_ce04.Fragments;
 // PersonDetailFragment
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.garytokman.tokmangary_ce04.Database.PersonDatabaseSchema.PersonTable;
+import com.garytokman.tokmangary_ce04.Helper.DateHelper;
 import com.garytokman.tokmangary_ce04.Model.People;
 import com.garytokman.tokmangary_ce04.Model.Person;
 import com.garytokman.tokmangary_ce04.R;
@@ -22,6 +26,9 @@ public class PersonDetailFragment extends Fragment {
 
     private static final String PERSON_DATA = "Person_Data";
     private static final String TAG = "PersonDetail";
+    private static final String PREFS_FILE = "com.garytokman.sharedpreferences.preferences";
+    private static final String CURRENT_DATE_PATTERN = "date_pattern";
+    private SharedPreferences mSharedPreferences;
 
     public PersonDetailFragment newInstance(Person person) {
 
@@ -49,7 +56,9 @@ public class PersonDetailFragment extends Fragment {
         TextView personHireDate = (TextView) view.findViewById(R.id.person_hire_date);
         TextView personStatus = (TextView) view.findViewById(R.id.person_status);
         Button deleteButton = (Button) view.findViewById(R.id.delete_person_button);
-
+        mSharedPreferences = getActivity().getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE);
+        String pattern = mSharedPreferences.getString(CURRENT_DATE_PATTERN, "");
+        Log.d(TAG, "onCreateView: pattern" + pattern);
 
         // Get arguments
         Bundle arguments = getArguments();
@@ -58,7 +67,7 @@ public class PersonDetailFragment extends Fragment {
         if (person != null) {
             personName.setText(person.getFullName());
             personNumber.setText(String.valueOf(person.getEmployeeNumber()));
-            personHireDate.setText(person.getHireDate().toString());
+            personHireDate.setText(DateHelper.newDateFormat(person.getHireDate(), pattern));
             personStatus.setText(person.getEmployeeStatus());
         }
 
