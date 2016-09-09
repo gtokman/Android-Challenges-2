@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TokmanGary_CE05</string>
+    <string name="back_button">back</string>
 </resources>
