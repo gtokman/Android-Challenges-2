@@ -2,7 +2,7 @@ package com.garytokman.tokmangary_ce04.Model;
 
 // Gary Tokman
 // JAV2 - 1609
-// MainActivity
+// People
 
 import android.content.ContentValues;
 import android.content.Context;

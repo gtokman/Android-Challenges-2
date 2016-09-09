@@ -1,9 +1,5 @@
 package com.garytokman.tokmangary_ce04.Fragments;
 
-// Gary Tokman
-// JAV2 - 1609
-// PersonDetailFragment
-
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -21,6 +17,10 @@ import com.garytokman.tokmangary_ce04.Helper.DateHelper;
 import com.garytokman.tokmangary_ce04.Model.People;
 import com.garytokman.tokmangary_ce04.Model.Person;
 import com.garytokman.tokmangary_ce04.R;
+
+// Gary Tokman
+// JAV2 - 1609
+// PersonDetailFragment
 
 public class PersonDetailFragment extends Fragment {
 
