@@ -2,35 +2,35 @@ package com.garytokman.tokmangary_ce05.Helpers;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
+import android.provider.ContactsContract.CommonDataKinds.Email;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 // Gary Tokman
 // JAVA 2 1609
 // ContactsCursorHelper
 
-public class ContactsCursorHelper extends CursorWrapper {
-
-    private static final String TAG = "ContactsCursorHelper";
-    private Cursor mCursor;
+public class ContactsCursorHelper extends CursorWrapper implements Serializable {
 
     public ContactsCursorHelper(Cursor cursor) {
         super(cursor);
-        mCursor = cursor;
     }
 
-    public List<String> getContactName() {
+    public String getName() {
+        return getString(getColumnIndex(Contacts.DISPLAY_NAME));
+    }
 
-        List<String> contacts = new ArrayList<>();
+    public String getNumber() {
+        return getString(getColumnIndex(Phone.NUMBER));
+    }
 
-//        Log.d(TAG, "getContactName: " + getString(getColumnIndex(Contacts.DISPLAY_NAME)));
-        while (mCursor.moveToNext()) {
-            String name = getString(getColumnIndex(Contacts.DISPLAY_NAME));
-            contacts.add(name);
-        }
+    public String getEmail() {
+        return getString(getColumnIndex(Email.ADDRESS));
+    }
 
-        return contacts;
+    public String getImage() {
+        return getString(getColumnIndex(Phone.PHOTO_URI));
     }
 }

@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.garytokman.tokmangary_ce05.Adapters.ContactListAdapter;
 import com.garytokman.tokmangary_ce05.Helpers.ContactsHelper;
@@ -18,7 +17,7 @@ import com.garytokman.tokmangary_ce05.Helpers.ContactsHelper;
 public class ContactsListFragment extends ListFragment {
 
     public interface OnContactSelected {
-        void getSelectedContact(String cursor);
+        void getSelectedContact(Cursor cursor);
     }
 
     private OnContactSelected mOnContactSelected;
@@ -48,9 +47,9 @@ public class ContactsListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Toast.makeText(getActivity(), l.getAdapter().getItem(position).toString(), Toast.LENGTH_SHORT).show();
-//        Cursor cursor = (Cursor) l.getAdapter().getItem(position);
-        String cursor = l.getAdapter().getItem(position).toString();
+
+        // Get cursor and notify
+        Cursor cursor = (Cursor) l.getAdapter().getItem(position);
         mOnContactSelected.getSelectedContact(cursor);
     }
 }

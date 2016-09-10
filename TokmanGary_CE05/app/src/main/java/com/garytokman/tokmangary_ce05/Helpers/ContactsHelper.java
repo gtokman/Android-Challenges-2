@@ -6,6 +6,7 @@ package com.garytokman.tokmangary_ce05.Helpers;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
+import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.Contacts;
 
@@ -15,7 +16,8 @@ public class ContactsHelper {
 
     private ContentResolver mContentResolver;
     // + " and "+ Phone.PHOTO_URI + " is not null
-    String whereClause = "" + Contacts.HAS_PHONE_NUMBER + " > 0 and " + Phone.TYPE + " = " + Phone.TYPE_MOBILE;
+    String whereClause = "" + Contacts.HAS_PHONE_NUMBER + " > 0 and " + Phone.TYPE + " = " + Phone.TYPE_MOBILE
+            + " and " + Email._ID + " = " + Contacts._ID;
     String sortOrder = Contacts.DISPLAY_NAME + " ASC";
 
     public ContactsHelper(ContentResolver contentResolver) {
@@ -24,7 +26,7 @@ public class ContactsHelper {
 
     public Cursor getContactName() {
 
-        Cursor cursor = mContentResolver.query(
+        return mContentResolver.query(
                 Phone.CONTENT_URI,
                 new String[]{
                         Phone.PHOTO_URI,
@@ -32,12 +34,14 @@ public class ContactsHelper {
                         Photo.CONTACT_ID,
                         Contacts.DISPLAY_NAME,
                         Contacts._ID,
+                        Email.DATA,
+                        Email._ID,
+                        Email.ADDRESS,
+                        Email.CONTACT_ID
                 },
                 whereClause,
                 null,
                 sortOrder
         );
-
-        return cursor;
     }
 }

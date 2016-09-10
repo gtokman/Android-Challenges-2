@@ -3,6 +3,7 @@ package com.garytokman.tokmangary_ce05;
 import android.Manifest.permission;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.database.Cursor;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,11 +39,6 @@ public class MainActivity extends AppCompatActivity implements ContactsListFragm
             // Request
             // Test
             addListFragment();
-//            ContactsHelper contactsHelper = new ContactsHelper(getContentResolver());
-//            Cursor nameCursor = contactsHelper.getContactName();
-//            ContactsCursorHelper cursorHelper = new ContactsCursorHelper(nameCursor);
-//            List<String> names = cursorHelper.getContactName();
-//            Log.d(TAG, "onCreate: name " + names.get(0));
         }
 
     }
@@ -63,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements ContactsListFragm
     }
 
     @Override
-    public void getSelectedContact(String cursor) {
+    public void getSelectedContact(Cursor cursor) {
         // TODO: Load detail with selected contact
         ContactDetailFragment contactDetailFragment = new ContactDetailFragment().newInstance(cursor);
         addFragmentToStack(contactDetailFragment, CONTACTS_DETAIL, R.id.detail_container);

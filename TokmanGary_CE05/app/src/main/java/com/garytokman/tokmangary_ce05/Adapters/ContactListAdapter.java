@@ -3,8 +3,6 @@ package com.garytokman.tokmangary_ce05.Adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.ContactsContract.CommonDataKinds;
-import android.provider.ContactsContract.Contacts;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +10,7 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.garytokman.tokmangary_ce05.Helpers.ContactsCursorHelper;
 import com.garytokman.tokmangary_ce05.R;
 
 // Gary Tokman
@@ -51,13 +50,15 @@ public class ContactListAdapter extends CursorAdapter {
 
         public void bindContact(Cursor cursor) {
             // TODO init with contact info
+            // Create helper
+            ContactsCursorHelper cursorHelper = new ContactsCursorHelper(cursor);
 
             // Set name and number
-            contactName.setText(cursor.getString(cursor.getColumnIndex(Contacts.DISPLAY_NAME)));
-            contactNumber.setText(cursor.getString(cursor.getColumnIndex(CommonDataKinds.Phone.NUMBER)));
+            contactName.setText(cursorHelper.getName());
+            contactNumber.setText(cursorHelper.getNumber());
 
             // Set image
-            String uriString = cursor.getString(cursor.getColumnIndex(CommonDataKinds.Phone.PHOTO_URI));
+            String uriString = cursorHelper.getImage();
             if (uriString == null) {
                 contactImage.setImageResource(R.drawable.ic_mood_bad_black_24dp);
             } else {
