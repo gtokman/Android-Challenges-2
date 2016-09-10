@@ -31,7 +31,12 @@ public class ContactsCursorHelper extends CursorWrapper implements Serializable 
     }
 
     public String getEmail() {
-        return getString(getColumnIndex(Email.ADDRESS));
+
+        if (this.moveToFirst()) {
+            return getString(getColumnIndex(Email.ADDRESS));
+        }
+
+        return "No email :(";
     }
 
     public String getImage() {

@@ -57,17 +57,19 @@ public class ContactDetailFragment extends Fragment {
 
         // Set properties
         if (cursorHelper != null) {
-            // Set Name
+            // Set Name and number
             name.setText(cursorHelper.getName());
             phoneNumber.setText(cursorHelper.getNumber());
 
-            // Test
+            // Set email if exists
             ContactsHelper contactsHelper = new ContactsHelper(getActivity().getContentResolver());
-            String emailData = contactsHelper.getEmailData(cursorHelper.getContactId());
-            Log.d(TAG, "onCreateView: " + emailData);
+            Cursor emailData = contactsHelper.getEmailData(cursorHelper.getContactId());
+            ContactsCursorHelper emailHelper = new ContactsCursorHelper(emailData);
+            String emailText = emailHelper.getEmail();
+            Log.d(TAG, "onCreateView: " + emailText);
 
-            if (emailData != null) {
-                email.setText(emailData);
+            if (emailText != null) {
+                email.setText(emailText);
             } else {
                 email.setText(R.string.no_email_text);
             }

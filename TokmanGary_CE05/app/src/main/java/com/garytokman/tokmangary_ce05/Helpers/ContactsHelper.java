@@ -47,7 +47,7 @@ public class ContactsHelper {
         );
     }
 
-    public String getEmailData(String where) {
+    public Cursor getEmailData(String where) {
         Cursor emailCursor = mContentResolver.query(
                 Email.CONTENT_URI,
                 new String[]{
@@ -57,18 +57,11 @@ public class ContactsHelper {
                         Email.CONTACT_ID
                 },
                 Email.CONTACT_ID + " = ?",
-                new String[] {where},
+                new String[]{where},
                 null
         );
 
-        if (emailCursor != null && emailCursor.moveToFirst()) {
-            String email = emailCursor.getString(emailCursor.getColumnIndex(Email.ADDRESS));
-            emailCursor.close();
-
-            return email;
-        }
-
-        return null;
+        return emailCursor;
     }
 
 }
