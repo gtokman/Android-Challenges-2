@@ -2,14 +2,14 @@ package com.garytokman.tokmangary_ce05.Fragments;
 
 import android.app.ListFragment;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.garytokman.tokmangary_ce05.Adapters.ContactListAdapter;
+import com.garytokman.tokmangary_ce05.Helpers.ContactsHelper;
 
 // Gary Tokman
 // JAVA 2 1609
@@ -37,13 +37,11 @@ public class ContactsListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        List<String> people = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            people.add("Gary Tokman");
-        }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, people);
-        setListAdapter(adapter);
+        ContactsHelper contactsHelper = new ContactsHelper(getActivity().getContentResolver());
+        Cursor cursor = contactsHelper.getContactName();
+        ContactListAdapter contactListAdapter = new ContactListAdapter(getActivity(), cursor);
+        setListAdapter(contactListAdapter);
 
     }
 

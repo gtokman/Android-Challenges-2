@@ -1,12 +1,20 @@
 package com.garytokman.tokmangary_ce05;
 
+import android.Manifest.permission;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.garytokman.tokmangary_ce05.Fragments.ContactDetailFragment;
 import com.garytokman.tokmangary_ce05.Fragments.ContactsListFragment;
+
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
+import static android.os.Build.VERSION.SDK_INT;
 
 // Gary Tokman
 // JAVA 2 1609
@@ -16,12 +24,30 @@ public class MainActivity extends AppCompatActivity implements ContactsListFragm
 
     private static final String LIST_FRAGMENT = "List_Fragment";
     private static final String CONTACTS_DETAIL = "Contacts_Detail";
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (SDK_INT >= VERSION_CODES.M && !canReadContacts()) {
+            // Read contacts
+            requestPermissions(new String[]{permission.READ_CONTACTS}, 123);
+        } else {
+            // Request
+            // Test
+            addListFragment();
+//            ContactsHelper contactsHelper = new ContactsHelper(getContentResolver());
+//            Cursor nameCursor = contactsHelper.getContactName();
+//            ContactsCursorHelper cursorHelper = new ContactsCursorHelper(nameCursor);
+//            List<String> names = cursorHelper.getContactName();
+//            Log.d(TAG, "onCreate: name " + names.get(0));
+        }
+
+    }
+
+    private void addListFragment() {
         // Add fragment
         ContactsListFragment contactsListFragment = new ContactsListFragment();
         addFragmentToStack(contactsListFragment, LIST_FRAGMENT, R.id.list_container);
@@ -42,4 +68,20 @@ public class MainActivity extends AppCompatActivity implements ContactsListFragm
         ContactDetailFragment contactDetailFragment = new ContactDetailFragment().newInstance(cursor);
         addFragmentToStack(contactDetailFragment, CONTACTS_DETAIL, R.id.detail_container);
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 123 && grantResults[0] == PERMISSION_GRANTED) {
+            addListFragment();
+        } else {
+            Toast.makeText(this, "Grant app permission to read contacts!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private boolean canReadContacts() {
+        return ContextCompat.checkSelfPermission(this, permission.READ_CONTACTS) == PERMISSION_GRANTED;
+    }
+
+
 }
