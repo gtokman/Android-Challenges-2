@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.garytokman.tokmangary_ce05.Helpers.ContactsCursorHelper;
+import com.garytokman.tokmangary_ce05.Helpers.ContactsHelper;
 import com.garytokman.tokmangary_ce05.R;
 
 // Gary Tokman
@@ -20,9 +22,8 @@ import com.garytokman.tokmangary_ce05.R;
 
 public class ContactDetailFragment extends Fragment {
 
-
     private static final String CONTACT_INFO = "Contact_Info";
-    private static final String TAG = "ContactDetailFragment";
+    private static final String TAG = "ContactDetail";
 
     public ContactDetailFragment newInstance(Cursor cursor) {
 
@@ -56,11 +57,22 @@ public class ContactDetailFragment extends Fragment {
 
         // Set properties
         if (cursorHelper != null) {
-            // Set fields
+            // Set Name
             name.setText(cursorHelper.getName());
             phoneNumber.setText(cursorHelper.getNumber());
-            email.setText(cursorHelper.getEmail());
 
+            // Test
+            ContactsHelper contactsHelper = new ContactsHelper(getActivity().getContentResolver());
+            String emailData = contactsHelper.getEmailData(cursorHelper.getContactId());
+            Log.d(TAG, "onCreateView: " + emailData);
+
+            if (emailData != null) {
+                email.setText(emailData);
+            } else {
+                email.setText(R.string.no_email_text);
+            }
+
+            // Set image
             String imageUri = cursorHelper.getImage();
             if (imageUri == null) {
                 contactsImage.setImageResource(R.drawable.ic_mood_bad_black_24dp);

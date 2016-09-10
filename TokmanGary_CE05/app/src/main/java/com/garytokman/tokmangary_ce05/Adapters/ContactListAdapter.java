@@ -38,9 +38,9 @@ public class ContactListAdapter extends CursorAdapter {
     }
 
     private static class ViewHolder {
-        ImageView contactImage;
-        TextView contactName;
-        TextView contactNumber;
+        final ImageView contactImage;
+        final TextView contactName;
+        final TextView contactNumber;
 
         public ViewHolder(View view) {
             contactImage = (ImageView) view.findViewById(R.id.item_image);

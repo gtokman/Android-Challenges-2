@@ -38,7 +38,7 @@ public class ContactsListFragment extends ListFragment {
 
 
         ContactsHelper contactsHelper = new ContactsHelper(getActivity().getContentResolver());
-        Cursor cursor = contactsHelper.getContactName();
+        Cursor cursor = contactsHelper.getContactData();
         ContactListAdapter contactListAdapter = new ContactListAdapter(getActivity(), cursor);
         setListAdapter(contactListAdapter);
 

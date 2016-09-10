@@ -22,6 +22,10 @@ public class ContactsCursorHelper extends CursorWrapper implements Serializable 
         return getString(getColumnIndex(Contacts.DISPLAY_NAME));
     }
 
+    public String getContactId() {
+        return getString(getColumnIndex(Email.CONTACT_ID));
+    }
+
     public String getNumber() {
         return getString(getColumnIndex(Phone.NUMBER));
     }

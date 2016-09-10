@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements ContactsListFragm
 
     private static final String LIST_FRAGMENT = "List_Fragment";
     private static final String CONTACTS_DETAIL = "Contacts_Detail";
-    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
