@@ -67,12 +67,7 @@ public class ContactDetailFragment extends Fragment {
             ContactsCursorHelper emailHelper = new ContactsCursorHelper(emailData);
             String emailText = emailHelper.getEmail();
             Log.d(TAG, "onCreateView: " + emailText);
-
-            if (emailText != null) {
-                email.setText(emailText);
-            } else {
-                email.setText(R.string.no_email_text);
-            }
+            email.setText(emailText);
 
             // Set image
             String imageUri = cursorHelper.getImage();

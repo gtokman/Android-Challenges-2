@@ -49,7 +49,7 @@ public class ContactListAdapter extends CursorAdapter {
         }
 
         public void bindContact(Cursor cursor) {
-            // TODO init with contact info
+
             // Create helper
             ContactsCursorHelper cursorHelper = new ContactsCursorHelper(cursor);
 

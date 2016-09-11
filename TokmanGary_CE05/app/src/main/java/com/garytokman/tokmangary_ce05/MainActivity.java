@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements ContactsListFragm
 
     private static final String LIST_FRAGMENT = "List_Fragment";
     private static final String CONTACTS_DETAIL = "Contacts_Detail";
+    private static final int REQUEST_CODE = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +34,10 @@ public class MainActivity extends AppCompatActivity implements ContactsListFragm
 
         if (SDK_INT >= VERSION_CODES.M && !canReadContacts()) {
             // Read contacts
-            requestPermissions(new String[]{permission.READ_CONTACTS}, 123);
+            requestPermissions(new String[]{permission.READ_CONTACTS}, REQUEST_CODE);
         } else {
-            // Request
-            // Test
             addListFragment();
         }
-
     }
 
     private void addListFragment() {
@@ -59,24 +57,20 @@ public class MainActivity extends AppCompatActivity implements ContactsListFragm
 
     @Override
     public void getSelectedContact(Cursor cursor) {
-        // TODO: Load detail with selected contact
         ContactDetailFragment contactDetailFragment = new ContactDetailFragment().newInstance(cursor);
         addFragmentToStack(contactDetailFragment, CONTACTS_DETAIL, R.id.detail_container);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 123 && grantResults[0] == PERMISSION_GRANTED) {
+        if (requestCode == REQUEST_CODE && grantResults[0] == PERMISSION_GRANTED) {
             addListFragment();
         } else {
-            Toast.makeText(this, "Grant app permission to read contacts!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.permission_denied_text, Toast.LENGTH_SHORT).show();
         }
-
     }
 
     private boolean canReadContacts() {
         return ContextCompat.checkSelfPermission(this, permission.READ_CONTACTS) == PERMISSION_GRANTED;
     }
-
-
 }

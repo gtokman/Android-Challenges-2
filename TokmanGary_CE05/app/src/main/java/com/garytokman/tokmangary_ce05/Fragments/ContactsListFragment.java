@@ -36,7 +36,7 @@ public class ContactsListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
+        // Pass cursor to adapter / set adapter
         ContactsHelper contactsHelper = new ContactsHelper(getActivity().getContentResolver());
         Cursor cursor = contactsHelper.getContactData();
         ContactListAdapter contactListAdapter = new ContactListAdapter(getActivity(), cursor);

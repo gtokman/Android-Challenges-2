@@ -1,9 +1,5 @@
 package com.garytokman.tokmangary_ce05.Helpers;
 
-// Gary Tokman
-// JAVA 2 1609
-// ContactsHelper
-
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.provider.ContactsContract.CommonDataKinds.Email;
@@ -11,6 +7,10 @@ import android.provider.ContactsContract.CommonDataKinds.Photo;
 import android.provider.ContactsContract.Contacts;
 
 import static android.provider.ContactsContract.CommonDataKinds.Phone;
+
+// Gary Tokman
+// JAVA 2 1609
+// ContactsHelper
 
 public class ContactsHelper {
 
@@ -48,7 +48,8 @@ public class ContactsHelper {
     }
 
     public Cursor getEmailData(String where) {
-        Cursor emailCursor = mContentResolver.query(
+
+        return mContentResolver.query(
                 Email.CONTENT_URI,
                 new String[]{
                         Email.DATA,
@@ -60,8 +61,6 @@ public class ContactsHelper {
                 new String[]{where},
                 null
         );
-
-        return emailCursor;
     }
 
 }
