@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.garytokman.tokmangary_ce06.Helpers.CursorHelper;
 import com.garytokman.tokmangary_ce06.R;
+import com.squareup.picasso.Picasso;
 
 // Gary Tokman
 // JAV2 - 1609
@@ -32,7 +33,7 @@ public class BookAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder viewHolder = new ViewHolder(view);
-        viewHolder.bindView(cursor);
+        viewHolder.bindView(cursor, context);
     }
 
     private static class ViewHolder {
@@ -44,10 +45,12 @@ public class BookAdapter extends CursorAdapter {
             bookThumbnail = (ImageView) view.findViewById(R.id.thumbnail_image);
         }
 
-        public void bindView(Cursor cursor) {
+        public void bindView(Cursor cursor, Context context) {
             CursorHelper cursorHelper = new CursorHelper(cursor);
             bookTitle.setText(cursorHelper.getBookTitle());
-            bookThumbnail.setImageResource(R.drawable.ic_mood_black_24dp);
+            Picasso.with(context)
+                    .load(cursorHelper.getBookThumbnail())
+                    .placeholder(R.drawable.ic_mood_black_24dp).into(bookThumbnail);
         }
     }
 }

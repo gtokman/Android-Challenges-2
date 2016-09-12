@@ -6,13 +6,14 @@ package com.garytokman.tokmangary_ce06.Fragments;
 
 import android.app.AlertDialog;
 import android.app.ListFragment;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.garytokman.tokmangary_ce06.Adapters.BookAdapter;
+import com.garytokman.tokmangary_ce06.Helpers.CursorHelper;
+import com.garytokman.tokmangary_ce06.Helpers.ReadBookProvider;
 
 public class BookListFragment extends ListFragment {
 
@@ -21,22 +22,21 @@ public class BookListFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        List<String> people = new ArrayList<>();
+        ReadBookProvider readBookProvider = new ReadBookProvider(getActivity().getContentResolver());
+        Cursor bookCursor = readBookProvider.getBookData();
 
-        for (int i = 0; i < 10; i++) {
-            people.add("Gary Tokman");
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, people);
-        setListAdapter(adapter);
+        BookAdapter bookAdapter = new BookAdapter(getActivity(), bookCursor, 1);
+        setListAdapter(bookAdapter);
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
-        String name = l.getAdapter().getItem(position).toString();
-        alert("Alert", name).show();
+        Cursor selectedItem = (Cursor) l.getAdapter().getItem(position);
+        CursorHelper cursorHelper = new CursorHelper(selectedItem);
+
+        alert("Alert", cursorHelper.getBookDescription()).show();
     }
 
     private AlertDialog.Builder alert(String title, String message) {

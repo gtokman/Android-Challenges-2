@@ -13,10 +13,14 @@ public class CursorHelper extends CursorWrapper {
     }
 
     public String getBookTitle() {
-        return getString(getColumnIndex(""));
+        return getString(getColumnIndex("title"));
+    }
+
+    public String getBookDescription() {
+        return getString(getColumnIndex("description"));
     }
 
     public String getBookThumbnail() {
-        return getString(getColumnIndex(""));
+        return getString(getColumnIndex("thumbnail"));
     }
 }
