@@ -8,7 +8,7 @@ public class DatabaseSchema {
 
     public static final class ArticleTable {
 
-        public static final String NAME = "articles";
+        public static final String NAME = "ArticlesProvider";
 
         public static final class Columns {
             public static final String ID = "_id";
