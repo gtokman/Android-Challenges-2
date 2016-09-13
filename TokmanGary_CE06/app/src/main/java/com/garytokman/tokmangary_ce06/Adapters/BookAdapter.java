@@ -48,9 +48,11 @@ public class BookAdapter extends CursorAdapter {
         public void bindView(Cursor cursor, Context context) {
             CursorHelper cursorHelper = new CursorHelper(cursor);
             bookTitle.setText(cursorHelper.getBookTitle());
+            String imageLink = cursorHelper.getBookThumbnail();
             Picasso.with(context)
-                    .load(cursorHelper.getBookThumbnail())
-                    .placeholder(R.drawable.ic_mood_black_24dp).into(bookThumbnail);
+                    .load(imageLink)
+                    .placeholder(R.drawable.ic_mood_black_24dp)
+                    .into(bookThumbnail);
         }
     }
 }
