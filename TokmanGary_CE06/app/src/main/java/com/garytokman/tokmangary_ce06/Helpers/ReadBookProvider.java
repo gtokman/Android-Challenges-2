@@ -1,16 +1,17 @@
 package com.garytokman.tokmangary_ce06.Helpers;
 
-// Gary Tokman
-// JAV2 - 1609
-// ReadBookProvider
 
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 
+// Gary Tokman
+// JAV2 - 1609
+// ReadBookProvider
+
 public class ReadBookProvider {
 
-    private ContentResolver mContentResolver;
+    private final ContentResolver mContentResolver;
 
     public ReadBookProvider(ContentResolver contentResolver) {
         mContentResolver = contentResolver;

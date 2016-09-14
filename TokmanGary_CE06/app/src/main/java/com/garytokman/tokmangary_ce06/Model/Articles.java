@@ -8,7 +8,6 @@ import java.util.List;
 // Articles
 
 public class Articles {
-
     public static List<Article> sArticles() {
         List<Article> articles = new ArrayList<>();
 
@@ -18,5 +17,4 @@ public class Articles {
 
         return articles;
     }
-
 }

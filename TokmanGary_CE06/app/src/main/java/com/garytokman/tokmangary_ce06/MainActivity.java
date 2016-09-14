@@ -4,10 +4,15 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.garytokman.tokmangary_ce06.Database.ArticleDatabase;
+import com.garytokman.tokmangary_ce06.Database.DatabaseSchema;
 import com.garytokman.tokmangary_ce06.Fragments.BookListFragment;
+import com.garytokman.tokmangary_ce06.Model.Article;
 import com.garytokman.tokmangary_ce06.Model.Articles;
+
+import java.util.List;
 
 // Gary Tokman
 // JAV2 - 1609
@@ -16,6 +21,7 @@ import com.garytokman.tokmangary_ce06.Model.Articles;
 public class MainActivity extends AppCompatActivity {
 
     private static final String LIST_FRAG = "List_Fragment";
+    private static final String TAG = "log";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +40,15 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
+        // Remove analyze code error "Class not instantiated"
+        Log.d(TAG, "onCreate: " + DatabaseSchema.ArticleTable.NAME);
+
+
         // Add articles to db
         ArticleDatabase articleDatabase = ArticleDatabase.newInstance(this);
-        articleDatabase.addArticles(Articles.sArticles().get(0));
-        articleDatabase.addArticles(Articles.sArticles().get(1));
-        articleDatabase.addArticles(Articles.sArticles().get(2));
+        List<Article> articles = Articles.sArticles();
+        for (Article article : articles) {
+            articleDatabase.addArticles(article);
+        }
     }
 }

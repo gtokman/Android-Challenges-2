@@ -57,15 +57,13 @@ public class ArticleDatabase extends SQLiteOpenHelper {
         getWritableDatabase().insert(ArticleTable.NAME, null, contentValues);
     }
 
-    public ContentValues getValues(Article article) {
+    private ContentValues getValues(Article article) {
 
         ContentValues contentValues = new ContentValues();
-
 
         contentValues.put(Columns.TITLE, article.getTitle());
         contentValues.put(Columns.THUMBNAIL, article.getThumbnail());
         contentValues.put(Columns.BODY, article.getBody());
-
 
         return contentValues;
     }

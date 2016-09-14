@@ -1,8 +1,5 @@
 package com.garytokman.tokmangary_ce06;
 
-// Gary Tokman
-// JAV2 - 1609
-// ArticlesProvider
 
 import android.content.ContentProvider;
 import android.content.ContentResolver;
@@ -11,19 +8,24 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.garytokman.tokmangary_ce06.Database.ArticleDatabase;
 import com.garytokman.tokmangary_ce06.Database.DatabaseSchema.ArticleTable;
 
+// Gary Tokman
+// JAV2 - 1609
+// ArticlesProvider
+
 public class ArticlesProvider extends ContentProvider {
 
-    public static final String AUTHORITY = "com.fullsail.ce6.student.provider";
-    UriMatcher mUriMatcher;
+    private static final String AUTHORITY = "com.fullsail.ce6.student.provider";
+    private UriMatcher mUriMatcher;
 
     @Override
     public boolean onCreate() {
-        // Init content provider on start
+        // Init uri matcher on start
         mUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         mUriMatcher.addURI(AUTHORITY, ArticleTable.NAME, 1);
         mUriMatcher.addURI(AUTHORITY, ArticleTable.NAME + "/#", 2);
@@ -33,14 +35,14 @@ public class ArticlesProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(Uri uri, String[] projection, String whereClause, String[] whereArgs, String sort) {
+    public Cursor query(@NonNull Uri uri, String[] projection, String whereClause, String[] whereArgs, String sort) {
         // handle query requests from book app
 
         final int matcher = mUriMatcher.match(uri);
         Cursor query;
 
         switch (matcher) {
-            case 1:
+            case  1:
                 query = ArticleDatabase.newInstance(getContext()).getReadableDatabase().query(
                         ArticleTable.NAME,
                         projection,
@@ -76,17 +78,14 @@ public class ArticlesProvider extends ContentProvider {
                         null
                 );
 
-
                 return query;
         }
-
-
     }
 
     @Nullable
     @Override
-    public String getType(Uri uri) {
-        // handle requests for MIME type // URI
+    public String getType(@NonNull Uri uri) {
+//         handle requests for MIME type
         final int matcher = mUriMatcher.match(uri);
 
         switch (matcher) {
@@ -101,18 +100,18 @@ public class ArticlesProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Uri insert(Uri uri, ContentValues contentValues) {
+    public Uri insert(@NonNull Uri uri, ContentValues contentValues) {
 
         return null;
     }
 
     @Override
-    public int delete(Uri uri, String s, String[] strings) {
+    public int delete(@NonNull Uri uri, String s, String[] strings) {
         return 0;
     }
 
     @Override
-    public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
+    public int update(@NonNull Uri uri, ContentValues contentValues, String s, String[] strings) {
         return 0;
     }
 }

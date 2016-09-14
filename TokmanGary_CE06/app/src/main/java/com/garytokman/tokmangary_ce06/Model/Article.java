@@ -6,9 +6,9 @@ package com.garytokman.tokmangary_ce06.Model;
 
 public class Article {
 
-    private String mTitle;
-    private String mThumbnail;
-    private String mBody;
+    private final String mTitle;
+    private final String mThumbnail;
+    private final String mBody;
 
     public Article(String title, String thumbnail, String body) {
         mTitle = title;

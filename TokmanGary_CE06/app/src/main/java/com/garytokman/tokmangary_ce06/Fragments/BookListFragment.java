@@ -1,8 +1,5 @@
 package com.garytokman.tokmangary_ce06.Fragments;
 
-// Gary Tokman
-// JAV2 - 1609
-// BookListFragment
 
 import android.app.AlertDialog;
 import android.app.ListFragment;
@@ -15,17 +12,22 @@ import com.garytokman.tokmangary_ce06.Adapters.BookAdapter;
 import com.garytokman.tokmangary_ce06.Helpers.CursorHelper;
 import com.garytokman.tokmangary_ce06.Helpers.ReadBookProvider;
 
-public class BookListFragment extends ListFragment {
+// Gary Tokman
+// JAV2 - 1609
+// BookListFragment
 
+public class BookListFragment extends ListFragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        // Get book cursor
         ReadBookProvider readBookProvider = new ReadBookProvider(getActivity().getContentResolver());
         Cursor bookCursor = readBookProvider.getBookData();
 
-        BookAdapter bookAdapter = new BookAdapter(getActivity(), bookCursor, 1);
+        // Create adapter
+        BookAdapter bookAdapter = new BookAdapter(getActivity(), bookCursor);
         setListAdapter(bookAdapter);
     }
 
@@ -33,16 +35,18 @@ public class BookListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
+        // Get selection
         Cursor selectedItem = (Cursor) l.getAdapter().getItem(position);
         CursorHelper cursorHelper = new CursorHelper(selectedItem);
 
-        alert("Alert", cursorHelper.getBookDescription()).show();
+        // Show
+        alert(cursorHelper.getBookDescription()).show();
     }
 
-    private AlertDialog.Builder alert(String title, String message) {
+    private AlertDialog.Builder alert(String message) {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
-        alert.setTitle(title);
+        alert.setTitle("Description");
         alert.setMessage(message);
         alert.setPositiveButton("OK", null);
 

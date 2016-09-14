@@ -18,8 +18,8 @@ import com.squareup.picasso.Picasso;
 // BookAdapter
 
 public class BookAdapter extends CursorAdapter {
-    public BookAdapter(Context context, Cursor c, int flags) {
-        super(context, c, flags);
+    public BookAdapter(Context context, Cursor c) {
+        super(context, c, 1);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class BookAdapter extends CursorAdapter {
     }
 
     private static class ViewHolder {
-        TextView bookTitle;
-        ImageView bookThumbnail;
+        final TextView bookTitle;
+        final ImageView bookThumbnail;
 
         public ViewHolder(View view) {
             bookTitle = (TextView) view.findViewById(R.id.book_name);
@@ -46,6 +46,7 @@ public class BookAdapter extends CursorAdapter {
         }
 
         public void bindView(Cursor cursor, Context context) {
+            // bind data to views
             CursorHelper cursorHelper = new CursorHelper(cursor);
             bookTitle.setText(cursorHelper.getBookTitle());
             String imageLink = cursorHelper.getBookThumbnail();
