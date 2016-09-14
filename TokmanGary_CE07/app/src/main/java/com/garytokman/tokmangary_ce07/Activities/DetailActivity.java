@@ -5,7 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.garytokman.tokmangary_ce07.R;
 
-public class DetailsActivity extends AppCompatActivity {
+// Gary Tokman
+// JAV2 - 1609
+// DetailActivity
+
+public class DetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
