@@ -1,9 +1,6 @@
 package com.garytokman.tokmangary_ce07.Activities;
 
-import android.app.FragmentManager;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.app.Fragment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,27 +12,13 @@ import com.garytokman.tokmangary_ce07.R;
 // JAV2 - 1609
 // FormActivity
 
-public class FormActivity extends AppCompatActivity {
+public class FormActivity extends BaseActivity {
 
     private static final String TAG = "FromActivity";
-    private static final String FORM_FRAGMENT = "Form_Fragment";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form);
-
-        // Init tool bar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.form_menu);
-        setSupportActionBar(toolbar);
-
-        // Init fragment
-        FragmentManager fragmentManager = getFragmentManager();
-        FormFragment formFragment = new FormFragment();
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.form_container, formFragment, FORM_FRAGMENT)
-                .commit();
+    public Fragment getFragment() {
+        return new FormFragment();
     }
 
     @Override

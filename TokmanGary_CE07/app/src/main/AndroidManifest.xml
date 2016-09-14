@@ -8,16 +8,20 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".Activities.DetailActivity">
+        </activity>
+        <activity android:name=".Activities.FormActivity">
+        </activity>
         <activity android:name=".Activities.ListActivity">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-        </activity>
-        <activity android:name=".Activities.DetailActivity">
-        </activity>
-        <activity android:name=".Activities.FormActivity">
+
         </activity>
     </application>
 

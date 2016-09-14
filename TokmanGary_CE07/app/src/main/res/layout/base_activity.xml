@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.garytokman.tokmangary_ce07.Activities.FormActivity">
+    tools:context=".Activities.BaseActivity">
+
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/pastel_red"
-        android:id="@+id/form_menu"
+        android:id="@+id/toolbar_menu"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:elevation="4dp"/>
@@ -19,11 +20,10 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/form_menu"
+        android:layout_below="@+id/toolbar_menu"
         android:layout_centerHorizontal="true"
         android:layout_margin="16dp"
-        android:id="@+id/form_container">
+        android:id="@+id/list_container">
     </FrameLayout>
-
 
 </RelativeLayout>

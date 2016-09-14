@@ -1,12 +1,14 @@
 package com.garytokman.tokmangary_ce07.Fragments;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.garytokman.tokmangary_ce07.Activities.DetailActivity;
 import com.garytokman.tokmangary_ce07.Model.Athlete;
 
 import java.util.ArrayList;
@@ -17,6 +19,8 @@ import java.util.List;
 // AthleteListFragment
 
 public class AthleteListFragment extends ListFragment {
+
+    public static final String SELECTION = "Selected_Athlete";
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -39,5 +43,10 @@ public class AthleteListFragment extends ListFragment {
 
         Athlete athlete = (Athlete) l.getAdapter().getItem(position);
         Toast.makeText(getActivity(), athlete.getName(), Toast.LENGTH_SHORT).show();
+
+        // Start detail intent
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra(SELECTION, athlete);
+        startActivity(intent);
     }
 }

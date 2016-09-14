@@ -1,19 +1,22 @@
 package com.garytokman.tokmangary_ce07.Activities;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Fragment;
 
-import com.garytokman.tokmangary_ce07.R;
+import com.garytokman.tokmangary_ce07.Fragments.AthleteListFragment;
+import com.garytokman.tokmangary_ce07.Fragments.DetailFragment;
+import com.garytokman.tokmangary_ce07.Model.Athlete;
 
 // Gary Tokman
 // JAV2 - 1609
 // DetailActivity
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
+    public Fragment getFragment() {
+
+        Athlete athlete = (Athlete) getIntent().getSerializableExtra(AthleteListFragment.SELECTION);
+
+        return new DetailFragment().newInstance(athlete);
     }
 }
