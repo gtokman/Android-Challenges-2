@@ -21,19 +21,25 @@ import com.garytokman.tokmangary_ce07.Model.Athlete;
 public class AthleteListFragment extends ListFragment {
 
     public static final String SELECTION = "Selected_Athlete";
-    SimpleCursorAdapter adapter;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        setEmptyText("No athletes");
+        updateList();
+    }
 
+    private void updateList() {
+
+        // Query db
         AthleteDatabase athleteDatabase = AthleteDatabase.getInstance(getActivity());
         Cursor athletes = athleteDatabase.getAllAthletes();
 
+        // Create adapter
         String[] from = {Columns.NAME, Columns.POSITION};
         int[] to = {android.R.id.text1, android.R.id.text2};
 
-        adapter = new SimpleCursorAdapter(getActivity(),
+        SimpleCursorAdapter adapter = new SimpleCursorAdapter(getActivity(),
                 android.R.layout.simple_list_item_2, athletes, from, to, 1);
 
         setListAdapter(adapter);
@@ -43,6 +49,7 @@ public class AthleteListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
+        // Get cursor at index
         Cursor athleteCursor = (Cursor) l.getAdapter().getItem(position);
         CursorHelper cursorHelper = new CursorHelper(athleteCursor);
         Athlete athlete = cursorHelper.getAthlete();
@@ -51,5 +58,11 @@ public class AthleteListFragment extends ListFragment {
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra(SELECTION, athlete);
         startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateList();
     }
 }

@@ -1,6 +1,7 @@
 package com.garytokman.tokmangary_ce07.Activities;
 
 import android.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +23,12 @@ public class FormActivity extends BaseActivity implements FormFragment.AthleteFo
 
     @Override
     public Fragment getFragment() {
-        getSupportActionBar().setTitle("Add Athletes");
+        // Change action bar title
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Add Athletes");
+        }
+
         return new FormFragment();
     }
 

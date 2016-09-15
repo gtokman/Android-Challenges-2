@@ -26,7 +26,7 @@ public class AthleteDatabase extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private static final String DB_NAME = "ArticlesProvider.db";
     private static final String CREATE_TABLE = "create table if not exists " +
-            AthleteTable.NAME + "(" +
+            DatabaseSchema.AthleteTable.NAME + "(" +
             Columns.ID + " integer primary key autoincrement, " +
             Columns.NAME + " text, " +
             Columns.POSITION + " text, " +

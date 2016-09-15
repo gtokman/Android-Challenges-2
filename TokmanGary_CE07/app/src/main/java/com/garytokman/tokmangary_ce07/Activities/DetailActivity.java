@@ -1,6 +1,7 @@
 package com.garytokman.tokmangary_ce07.Activities;
 
 import android.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,11 +26,16 @@ public class DetailActivity extends BaseActivity {
     @Override
     public Fragment getFragment() {
 
-        getSupportActionBar().setTitle("Detail");
+        // Change action bar title
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Detail");
+        }
 
+        // Get athlete from intent
         mAthlete = (Athlete) getIntent().getSerializableExtra(AthleteListFragment.SELECTION);
 
-        return new DetailFragment().newInstance(mAthlete);
+        return DetailFragment.newInstance(mAthlete);
     }
 
     @Override
@@ -64,7 +70,7 @@ public class DetailActivity extends BaseActivity {
     private void deleteAthlete() {
         AthleteDatabase athleteDatabase = AthleteDatabase.getInstance(this);
         athleteDatabase.deleteAthlete(Columns.JERSEY_NUMBER + " = ?",
-                new String[] {String.valueOf(mAthlete.getJerseyNumber())});
+                new String[]{String.valueOf(mAthlete.getJerseyNumber())});
         Toast.makeText(this, "Athlete deleted", Toast.LENGTH_SHORT).show();
         finish();
     }
