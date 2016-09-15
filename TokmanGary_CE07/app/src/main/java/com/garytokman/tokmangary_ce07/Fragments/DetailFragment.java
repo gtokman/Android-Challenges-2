@@ -11,6 +11,9 @@ import android.widget.TextView;
 import com.garytokman.tokmangary_ce07.Model.Athlete;
 import com.garytokman.tokmangary_ce07.R;
 
+// Gary Tokman
+// JAV2 - 1609
+// DetailFragment
 
 public class DetailFragment extends Fragment {
 

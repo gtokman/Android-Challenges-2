@@ -31,8 +31,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.list_container, getFragment(), FRAGMENT)
                 .commit();
-
     }
 
-    abstract public Fragment getFragment();
+    protected abstract Fragment getFragment();
 }

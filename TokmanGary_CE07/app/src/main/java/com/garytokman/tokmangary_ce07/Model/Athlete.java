@@ -8,13 +8,13 @@ import java.io.Serializable;
 
 public class Athlete implements Serializable {
 
-    private String mName;
-    private String mPosition;
-    private int mJerseyNumber;
+    private final String mName;
+    private final String mPosition;
+    private final int mJerseyNumber;
 
-    public Athlete(String name, String positon, int jerseyNumber) {
+    public Athlete(String name, String position, int jerseyNumber) {
         mName = name;
-        mPosition = positon;
+        mPosition = position;
         mJerseyNumber = jerseyNumber;
     }
 
