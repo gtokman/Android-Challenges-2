@@ -17,23 +17,9 @@ public class CursorHelper extends CursorWrapper implements Serializable {
         super(cursor);
     }
 
-
-//    public String getName() {
-//        return getString(getColumnIndex(Columns.NAME));
-//    }
-//
-//    public String getPositon() {
-//        return getString(getColumnIndex(Columns.POSITION));
-//    }
-//
-//    public int getJerseyNumber() {
-//        return Integer.valueOf(getString(getColumnIndex(Columns.JERSEY_NUMBER)));
-//    }
-
     public Athlete getAthlete() {
         return new Athlete(getString(getColumnIndex(Columns.NAME)),
                 getString(getColumnIndex(Columns.POSITION)),
                 Integer.valueOf(getString(getColumnIndex(Columns.JERSEY_NUMBER))));
     }
-
 }

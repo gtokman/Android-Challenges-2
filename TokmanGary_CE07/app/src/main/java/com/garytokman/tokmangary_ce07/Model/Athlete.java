@@ -32,6 +32,6 @@ public class Athlete implements Serializable {
 
     @Override
     public String toString() {
-        return mName + " " + mJerseyNumber;
+        return " Name: " + mName + " Position: " + mPosition + " #" + mJerseyNumber;
     }
 }

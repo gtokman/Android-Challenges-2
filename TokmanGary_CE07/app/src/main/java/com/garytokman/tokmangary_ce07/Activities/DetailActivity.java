@@ -1,6 +1,7 @@
 package com.garytokman.tokmangary_ce07.Activities;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.Menu;
@@ -48,9 +49,7 @@ public class DetailActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        int id = item.getItemId();
-
-        switch (id) {
+        switch (item.getItemId()) {
             case R.id.delete_toolbar_button:
                 Log.d(TAG, "delete button pressed");
                 // Delete
@@ -59,12 +58,21 @@ public class DetailActivity extends BaseActivity {
                 break;
             case R.id.share_toolbar_button:
                 Log.d(TAG, "share button pressed: ");
-                break;
-            default:
+                // Share intent
+                shareAthlete();
+
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void shareAthlete() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, mAthlete.toString());
+        intent.setType("text/plain");
+        startActivity(intent);
     }
 
     private void deleteAthlete() {

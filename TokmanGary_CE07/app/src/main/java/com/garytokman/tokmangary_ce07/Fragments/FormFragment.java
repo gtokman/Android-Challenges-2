@@ -1,9 +1,5 @@
 package com.garytokman.tokmangary_ce07.Fragments;
 
-// Gary Tokman
-// JAV2 - 1609
-// FormFragment
-
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -24,13 +20,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// Gary Tokman
+// JAV2 - 1609
+// FormFragment
+
 public class FormFragment extends Fragment {
 
     public interface AthleteFormListener {
         void getNewAthlete(Athlete athlete);
     }
 
-    private static final String TAG = "FromFrag";
+    private static final String TAG = "FromFragment";
     private List<EditText> mEditTexts;
     private EditText mName;
     private EditText mPosition;

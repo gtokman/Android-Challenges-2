@@ -1,9 +1,5 @@
 package com.garytokman.tokmangary_ce07.Database;
 
-// Gary Tokman
-// JAV2 - 1609
-// AthleteDatabase
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;

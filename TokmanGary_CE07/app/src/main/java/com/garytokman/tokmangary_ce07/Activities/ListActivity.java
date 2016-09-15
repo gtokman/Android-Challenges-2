@@ -10,6 +10,10 @@ import android.view.MenuItem;
 import com.garytokman.tokmangary_ce07.Fragments.AthleteListFragment;
 import com.garytokman.tokmangary_ce07.R;
 
+// Gary Tokman
+// JAV2 - 1609
+// ListActivity
+
 public class ListActivity extends BaseActivity {
 
     private static final String TAG = "List_Activity";
