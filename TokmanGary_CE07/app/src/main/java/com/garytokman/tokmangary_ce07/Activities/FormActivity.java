@@ -4,17 +4,20 @@ import android.app.Fragment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.garytokman.tokmangary_ce07.Fragments.FormFragment;
+import com.garytokman.tokmangary_ce07.Model.Athlete;
 import com.garytokman.tokmangary_ce07.R;
 
 // Gary Tokman
 // JAV2 - 1609
 // FormActivity
 
-public class FormActivity extends BaseActivity {
+public class FormActivity extends BaseActivity implements FormFragment.AthleteFormListener {
 
     private static final String TAG = "FromActivity";
+    private Athlete mAthlete;
 
     @Override
     public Fragment getFragment() {
@@ -34,10 +37,27 @@ public class FormActivity extends BaseActivity {
         int id = item.getItemId();
 
         if (id == R.id.save_toolbar_button) {
-            Log.d(TAG, "form save button: ");
+            if (mAthlete != null) {
+
+                Log.d(TAG, "form save button: " + mAthlete.getName() + mAthlete.getPosition() + mAthlete.getJerseyNumber());
+                Toast.makeText(this, "Athlete saved", Toast.LENGTH_SHORT).show();
+                finish();
+                return true;
+            }
+
+            Toast.makeText(this, "Athlete not saved", Toast.LENGTH_SHORT).show();
             finish();
         }
 
-        return super.onOptionsItemSelected(item);
+        return false;
+    }
+
+    @Override
+    public void getNewAthlete(Athlete athlete) {
+
+        // Get athlete instance
+        if (athlete != null) {
+            mAthlete = athlete;
+        }
     }
 }
