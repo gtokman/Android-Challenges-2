@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.garytokman.tokmangary_ce07.Database.AthleteDatabase;
 import com.garytokman.tokmangary_ce07.Fragments.FormFragment;
 import com.garytokman.tokmangary_ce07.Model.Athlete;
 import com.garytokman.tokmangary_ce07.R;
@@ -21,6 +22,7 @@ public class FormActivity extends BaseActivity implements FormFragment.AthleteFo
 
     @Override
     public Fragment getFragment() {
+        getSupportActionBar().setTitle("Add Athletes");
         return new FormFragment();
     }
 
@@ -40,13 +42,16 @@ public class FormActivity extends BaseActivity implements FormFragment.AthleteFo
             if (mAthlete != null) {
 
                 Log.d(TAG, "form save button: " + mAthlete.getName() + mAthlete.getPosition() + mAthlete.getJerseyNumber());
+                // Save athlete
+                AthleteDatabase athleteDatabase = AthleteDatabase.getInstance(this);
+                athleteDatabase.saveAthlete(mAthlete);
+
                 Toast.makeText(this, "Athlete saved", Toast.LENGTH_SHORT).show();
                 finish();
                 return true;
             }
 
-            Toast.makeText(this, "Athlete not saved", Toast.LENGTH_SHORT).show();
-            finish();
+            Toast.makeText(this, "Athlete not saved, no empty fields!", Toast.LENGTH_SHORT).show();
         }
 
         return false;
@@ -55,7 +60,7 @@ public class FormActivity extends BaseActivity implements FormFragment.AthleteFo
     @Override
     public void getNewAthlete(Athlete athlete) {
 
-        // Get athlete instance
+        // Set athlete instance
         if (athlete != null) {
             mAthlete = athlete;
         }

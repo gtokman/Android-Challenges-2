@@ -15,6 +15,7 @@ public class ListActivity extends BaseActivity {
 
     @Override
     public Fragment getFragment() {
+        getSupportActionBar().setTitle("Athlete List");
         return new AthleteListFragment();
     }
 

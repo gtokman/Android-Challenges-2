@@ -4,13 +4,16 @@ package com.garytokman.tokmangary_ce07.Database;
 // JAV2 - 1609
 // AthleteDatabase
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.garytokman.tokmangary_ce07.Database.DatabaseSchema.AthleteTable;
 import com.garytokman.tokmangary_ce07.Database.DatabaseSchema.AthleteTable.Columns;
+import com.garytokman.tokmangary_ce07.Model.Athlete;
 
 // Gary Tokman
 // JAV2 - 1609
@@ -27,7 +30,7 @@ public class AthleteDatabase extends SQLiteOpenHelper {
             Columns.ID + " integer primary key autoincrement, " +
             Columns.NAME + " text, " +
             Columns.POSITION + " text, " +
-            Columns.JERSEY_NUMBER + " int " + ")";
+            Columns.JERSEY_NUMBER + " integer " + ")";
 
     public static AthleteDatabase getInstance(Context context) {
 
@@ -51,5 +54,27 @@ public class AthleteDatabase extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         // Upgrade
+    }
+
+    public Cursor getAllAthletes() {
+       return getReadableDatabase().query(AthleteTable.NAME, null, null, null, null, null, null);
+    }
+
+    public void deleteAthlete(String where, String[] whereArgs) {
+        getWritableDatabase().delete(AthleteTable.NAME, where, whereArgs);
+    }
+
+    public void saveAthlete(Athlete athlete) {
+        getWritableDatabase().insert(AthleteTable.NAME, null, getValues(athlete));
+    }
+
+    private ContentValues getValues(Athlete athlete) {
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(Columns.NAME, athlete.getName());
+        contentValues.put(Columns.POSITION, athlete.getPosition());
+        contentValues.put(Columns.JERSEY_NUMBER, athlete.getJerseyNumber());
+
+        return contentValues;
     }
 }

@@ -4,7 +4,10 @@ import android.app.Fragment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.garytokman.tokmangary_ce07.Database.AthleteDatabase;
+import com.garytokman.tokmangary_ce07.Database.DatabaseSchema.AthleteTable.Columns;
 import com.garytokman.tokmangary_ce07.Fragments.AthleteListFragment;
 import com.garytokman.tokmangary_ce07.Fragments.DetailFragment;
 import com.garytokman.tokmangary_ce07.Model.Athlete;
@@ -17,13 +20,16 @@ import com.garytokman.tokmangary_ce07.R;
 public class DetailActivity extends BaseActivity {
 
     private static final String TAG = "Detail Activity";
+    private Athlete mAthlete;
 
     @Override
     public Fragment getFragment() {
 
-        Athlete athlete = (Athlete) getIntent().getSerializableExtra(AthleteListFragment.SELECTION);
+        getSupportActionBar().setTitle("Detail");
 
-        return new DetailFragment().newInstance(athlete);
+        mAthlete = (Athlete) getIntent().getSerializableExtra(AthleteListFragment.SELECTION);
+
+        return new DetailFragment().newInstance(mAthlete);
     }
 
     @Override
@@ -41,6 +47,9 @@ public class DetailActivity extends BaseActivity {
         switch (id) {
             case R.id.delete_toolbar_button:
                 Log.d(TAG, "delete button pressed");
+                // Delete
+                deleteAthlete();
+
                 break;
             case R.id.share_toolbar_button:
                 Log.d(TAG, "share button pressed: ");
@@ -50,5 +59,13 @@ public class DetailActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteAthlete() {
+        AthleteDatabase athleteDatabase = AthleteDatabase.getInstance(this);
+        athleteDatabase.deleteAthlete(Columns.JERSEY_NUMBER + " = ?",
+                new String[] {String.valueOf(mAthlete.getJerseyNumber())});
+        Toast.makeText(this, "Athlete deleted", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }
