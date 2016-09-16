@@ -8,11 +8,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".FormActivity">
-
             <intent-filter>
                 <action android:name="com.fullsail.android.jav2ce08.ACTION_ADD_PERSON"/>
-                <category android:name="android.intent.category.DEFAULT" />
+
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".Activities.DetailActivity">
         </activity>
     </application>
 
