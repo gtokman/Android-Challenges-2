@@ -1,12 +1,13 @@
-package com.garytokman.tokmangary_ce08;
+package com.garytokman.tokmangary_ce08.Activities;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.garytokman.tokmangary_ce08.Activities.BaseActivity;
 import com.garytokman.tokmangary_ce08.Fragments.FormFragment;
+import com.garytokman.tokmangary_ce08.R;
 
 // Gary Tokman
 // JAV2 - 1609
@@ -15,6 +16,9 @@ import com.garytokman.tokmangary_ce08.Fragments.FormFragment;
 public class FormActivity extends BaseActivity {
 
     private static final String TAG = "FormActivity";
+    private static final String EXTRA_STRING_FIRST_NAME = "com.fullsail.android.jav2ce08.EXTRA_STRING_FIRST_NAME";
+    private static final String EXTRA_STRING_LAST_NAME = "com.fullsail.android.jav2ce08.EXTRA_STRING_LAST_NAME";
+    private static final String EXTRA_INTEGER_AGE = "com.fullsail.android.jav2ce08.EXTRA_INT_AGE";
 
     @Override
     protected Fragment getFragment() {
@@ -33,7 +37,18 @@ public class FormActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.save_button) {
+
             Toast.makeText(this, "Saved person", Toast.LENGTH_SHORT).show();
+
+
+            Intent data = new Intent();
+            data.putExtra(EXTRA_STRING_FIRST_NAME, "Gary");
+            data.putExtra(EXTRA_STRING_LAST_NAME, "Tokman");
+            data.putExtra(EXTRA_INTEGER_AGE, 1);
+            setResult(RESULT_OK, data);
+
+
+
             finish();
         }
 
