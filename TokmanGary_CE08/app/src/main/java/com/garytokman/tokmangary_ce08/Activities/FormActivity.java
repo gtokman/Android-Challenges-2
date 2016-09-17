@@ -16,11 +16,10 @@ import com.garytokman.tokmangary_ce08.R;
 
 public class FormActivity extends BaseActivity implements FormFragment.OnPersonListener {
 
-    private static final String TAG = "FormActivity";
     private static final String EXTRA_STRING_FIRST_NAME = "com.fullsail.android.jav2ce08.EXTRA_STRING_FIRST_NAME";
     private static final String EXTRA_STRING_LAST_NAME = "com.fullsail.android.jav2ce08.EXTRA_STRING_LAST_NAME";
     private static final String EXTRA_INTEGER_AGE = "com.fullsail.android.jav2ce08.EXTRA_INT_AGE";
-    public Person mPerson;
+    private Person mPerson;
 
     @Override
     protected Fragment getFragment() {
@@ -42,9 +41,9 @@ public class FormActivity extends BaseActivity implements FormFragment.OnPersonL
 
             if (mPerson != null) {
 
-                Toast.makeText(this, "Saved person", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Saved person " + mPerson.toString(), Toast.LENGTH_SHORT).show();
 
-                // Create intent and add extas
+                // Create intent and add extras
                 Intent data = new Intent();
                 data.putExtra(EXTRA_STRING_FIRST_NAME, mPerson.getFirstName());
                 data.putExtra(EXTRA_STRING_LAST_NAME, mPerson.getLastName());

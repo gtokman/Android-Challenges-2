@@ -1,25 +1,21 @@
 package com.garytokman.tokmangary_ce08.Model;
 
 import java.io.Serializable;
-import java.util.Observable;
 
 // Gary Tokman
 // JAV2 - 1609
 // Person
 
-public class Person extends Observable implements Serializable {
+public class Person implements Serializable {
 
-    private String mFirstName;
-    private String mLastName;
-    private int mAge;
+    private final String mFirstName;
+    private final String mLastName;
+    private final int mAge;
 
     public Person(String firstName, String lastName, int age) {
         mFirstName = firstName;
         mLastName = lastName;
         mAge = age;
-
-        setChanged();
-        notifyObservers();
 
     }
 
