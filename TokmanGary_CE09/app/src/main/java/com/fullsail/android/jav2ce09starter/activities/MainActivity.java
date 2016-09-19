@@ -5,11 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.fullsail.android.jav2ce09starter.R;
@@ -44,6 +44,16 @@ public class MainActivity extends AppCompatActivity implements
         BottomBar bottomBar = (BottomBar) findViewById(R.id.bottom_bar_main);
         bottomBar.setOnTabSelectListener(mReselectListener);
 
+        // Fab
+        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.add_fab);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), FormActivity.class);
+                startActivityForResult(intent, REQUEST_FORM);
+            }
+        });
+
         // Assigning the default filter.
         mCurrentFilter = PersonListFragment.FILTER_ALL;
 
@@ -57,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    private OnTabSelectListener mReselectListener = new OnTabSelectListener() {
+    private final OnTabSelectListener mReselectListener = new OnTabSelectListener() {
         @Override
         public void onTabSelected(@IdRes int tabId) {
             switch (tabId) {
@@ -76,23 +86,6 @@ public class MainActivity extends AppCompatActivity implements
             }
         }
     };
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        if(item.getItemId() == R.id.action_add) {
-            Intent intent = new Intent(this, FormActivity.class);
-            startActivityForResult(intent, REQUEST_FORM);
-        }
-
-        return true;
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
