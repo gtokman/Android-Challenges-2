@@ -16,7 +16,7 @@ import java.util.List;
 // JAV2 - 1609
 // PersonRecyclerAdapter
 
-public class PersonRecyclerAdapter extends RecyclerView.Adapter<PersonHolder>{
+public class PersonRecyclerAdapter extends RecyclerView.Adapter<PersonHolder> {
 
     private final List<Person> mPersons;
     private final Context mContext;
@@ -32,7 +32,7 @@ public class PersonRecyclerAdapter extends RecyclerView.Adapter<PersonHolder>{
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View view = layoutInflater.inflate(R.layout.person_recycler_item, parent, false);
 
-        return new PersonHolder(view, mContext);
+        return new PersonHolder(view);
     }
 
     @Override
@@ -46,5 +46,6 @@ public class PersonRecyclerAdapter extends RecyclerView.Adapter<PersonHolder>{
     public int getItemCount() {
         return mPersons.size();
     }
+
 }
 

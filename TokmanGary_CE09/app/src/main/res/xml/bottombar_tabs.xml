@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <tabs>
+
+        <tab
+            id="@+id/tab_search_one"
+            icon="@drawable/ic_account_circle_black_24dp"
+            title="All"/>
+
+        <tab
+            id="@+id/tab_search_two"
+            icon="@drawable/ic_account_circle_black_24dp"
+            title="Under 30"/>
+
+        <tab
+            id="@+id/tab_search_three"
+            icon="@drawable/ic_account_circle_black_24dp"
+            title="30 and older"/>
+
+    </tabs>
+
+</PreferenceScreen>

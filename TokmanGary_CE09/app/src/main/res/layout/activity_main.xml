@@ -14,16 +14,18 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <Spinner
-        android:id="@+id/filterSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
     <LinearLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.0"
         android:orientation="vertical"/>
+
+    <com.roughike.bottombar.BottomBar
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/bottom_bar_main"
+        app:bb_tabXmlResource="@xml/bottombar_tabs"
+    />
 
 </LinearLayout>

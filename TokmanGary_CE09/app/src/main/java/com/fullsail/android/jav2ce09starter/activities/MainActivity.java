@@ -3,15 +3,13 @@ package com.fullsail.android.jav2ce09starter.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.fullsail.android.jav2ce09starter.R;
@@ -19,11 +17,14 @@ import com.fullsail.android.jav2ce09starter.fragment.PersonListFragment;
 import com.fullsail.android.jav2ce09starter.fragment.PersonRecyclerListFragment;
 import com.fullsail.android.jav2ce09starter.object.Person;
 import com.fullsail.android.jav2ce09starter.util.PersonUtil;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 public class MainActivity extends AppCompatActivity implements
-        PersonListFragment.OnPersonInteractionListener, AdapterView.OnItemSelectedListener {
+        PersonListFragment.OnPersonInteractionListener {
 
     private static final int REQUEST_FORM = 0x01001;
+    private static final String TAG = "MainActvity";
 
     private int mCurrentFilter;
 
@@ -39,11 +40,9 @@ public class MainActivity extends AppCompatActivity implements
         // Set icon
         toolbar.setLogo(R.mipmap.ic_launcher);
 
-        // Setting up the filter options spinner.
-        Spinner filterSpinner = (Spinner)findViewById(R.id.filterSpinner);
-        String[] filterValues = getResources().getStringArray(R.array.spinner_values);
-        filterSpinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, filterValues));
-        filterSpinner.setOnItemSelectedListener(this);
+        // Bottom bar
+        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottom_bar_main);
+        bottomBar.setOnTabSelectListener(mReselectListener);
 
         // Assigning the default filter.
         mCurrentFilter = PersonListFragment.FILTER_ALL;
@@ -57,6 +56,26 @@ public class MainActivity extends AppCompatActivity implements
                     .commit();
         }
     }
+
+    private OnTabSelectListener mReselectListener = new OnTabSelectListener() {
+        @Override
+        public void onTabSelected(@IdRes int tabId) {
+            switch (tabId) {
+                case R.id.tab_search_one:
+                    mCurrentFilter = 0;
+                    Log.d(TAG, "onTabReSelected: 0");
+                    break;
+                case R.id.tab_search_two:
+                    mCurrentFilter = 1;
+                    Log.d(TAG, "onTabReSelected: 1");
+                    break;
+                case R.id.tab_search_three:
+                    mCurrentFilter = 2;
+                    Log.d(TAG, "onTabReSelected: 2");
+                    break;
+            }
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -117,15 +136,4 @@ public class MainActivity extends AppCompatActivity implements
 //        }
 //    }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        // Switching out the filter when a new spinner option is selected.
-        mCurrentFilter = i;
-//        refreshList();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
 }
