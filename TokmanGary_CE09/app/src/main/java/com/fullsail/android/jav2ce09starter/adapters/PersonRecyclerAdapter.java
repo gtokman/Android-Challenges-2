@@ -12,13 +12,14 @@ import com.fullsail.android.jav2ce09starter.viewholders.PersonHolder;
 
 import java.util.List;
 
-/**
- * Created by gtokman1 on 9/19/16.
- */
+// Gary Tokman
+// JAV2 - 1609
+// PersonRecyclerAdapter
+
 public class PersonRecyclerAdapter extends RecyclerView.Adapter<PersonHolder>{
 
-    private List<Person> mPersons;
-    private Context mContext;
+    private final List<Person> mPersons;
+    private final Context mContext;
 
     public PersonRecyclerAdapter(List<Person> persons, Context context) {
         mPersons = persons;
@@ -36,10 +37,9 @@ public class PersonRecyclerAdapter extends RecyclerView.Adapter<PersonHolder>{
 
     @Override
     public void onBindViewHolder(PersonHolder holder, int position) {
-        // Bind person at positon
+        // Bind person at position
         Person person = mPersons.get(position);
         holder.bindView(person);
-
     }
 
     @Override

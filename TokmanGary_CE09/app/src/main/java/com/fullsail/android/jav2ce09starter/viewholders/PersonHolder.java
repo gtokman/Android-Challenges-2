@@ -9,13 +9,14 @@ import android.widget.Toast;
 import com.fullsail.android.jav2ce09starter.R;
 import com.fullsail.android.jav2ce09starter.object.Person;
 
-/**
- * Created by gtokman1 on 9/19/16.
- */
+// Gary Tokman
+// JAV2 - 1609
+// PersonHolder
+
 public class PersonHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    TextView mPersonDetails;
-    Context mContext;
+    private final TextView mPersonDetails;
+    private final Context mContext;
 
     public PersonHolder(View itemView, Context context) {
         super(itemView);

@@ -1,11 +1,13 @@
-package com.fullsail.android.jav2ce09starter;
+package com.fullsail.android.jav2ce09starter.activities;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.fullsail.android.jav2ce09starter.R;
 import com.fullsail.android.jav2ce09starter.fragment.PersonFormFragment;
 import com.fullsail.android.jav2ce09starter.object.Person;
 import com.fullsail.android.jav2ce09starter.util.PersonUtil;
@@ -16,6 +18,13 @@ public class FormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
+
+        // Init toolbar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_menu);
+        setSupportActionBar(toolbar);
+
+        // Set icon
+        toolbar.setLogo(R.mipmap.ic_launcher);
 
         if(savedInstanceState == null) {
             PersonFormFragment fragment = PersonFormFragment.newInstance();

@@ -16,9 +16,10 @@ import com.fullsail.android.jav2ce09starter.util.PersonUtil;
 
 import java.util.List;
 
-/**
- * Created by gtokman1 on 9/19/16.
- */
+// Gary Tokman
+// JAV2 - 1609
+// PersonRecyclerListFragment
+
 public class PersonRecyclerListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
@@ -36,7 +37,7 @@ public class PersonRecyclerListFragment extends Fragment {
 
         // Update
         updateList();
-        
+
         return view;
     }
 

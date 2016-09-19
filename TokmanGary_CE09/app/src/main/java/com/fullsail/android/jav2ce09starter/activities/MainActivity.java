@@ -1,10 +1,11 @@
-package com.fullsail.android.jav2ce09starter;
+package com.fullsail.android.jav2ce09starter.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.fullsail.android.jav2ce09starter.R;
 import com.fullsail.android.jav2ce09starter.fragment.PersonListFragment;
 import com.fullsail.android.jav2ce09starter.fragment.PersonRecyclerListFragment;
 import com.fullsail.android.jav2ce09starter.object.Person;
@@ -29,6 +31,13 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Set tool bar
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_menu);
+        setSupportActionBar(toolbar);
+
+        // Set icon
+        toolbar.setLogo(R.mipmap.ic_launcher);
 
         // Setting up the filter options spinner.
         Spinner filterSpinner = (Spinner)findViewById(R.id.filterSpinner);
