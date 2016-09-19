@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.fullsail.android.jav2ce09starter.fragment.PersonListFragment;
+import com.fullsail.android.jav2ce09starter.fragment.PersonRecyclerListFragment;
 import com.fullsail.android.jav2ce09starter.object.Person;
 import com.fullsail.android.jav2ce09starter.util.PersonUtil;
 
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity implements
 
         // Adding our list fragment one time only.
         if(savedInstanceState == null) {
-            PersonListFragment fragment = PersonListFragment.newInstance(mCurrentFilter);
+//            PersonListFragment fragment = PersonListFragment.newInstance(mCurrentFilter);
+            PersonRecyclerListFragment fragment = new PersonRecyclerListFragment();
             getFragmentManager().beginTransaction()
                     .replace(R.id.container, fragment, PersonListFragment.TAG)
                     .commit();
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements
 
         // Only refresh the list if a save operation was successful.
         if(requestCode == REQUEST_FORM && resultCode == RESULT_OK) {
-            refreshList();
+//            refreshList();
         }
     }
 
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         PersonUtil.deletePerson(MainActivity.this, p);
-                        refreshList();
+//                        refreshList();
                     }
                 })
                 .setNegativeButton(R.string.no, null)
@@ -98,19 +100,19 @@ public class MainActivity extends AppCompatActivity implements
     /**
      * Refreshes the current list fragment with the most recent filter.
      */
-    private void refreshList() {
-        PersonListFragment fragment = (PersonListFragment) getFragmentManager()
-                .findFragmentByTag(PersonListFragment.TAG);
-        if(fragment != null) {
-            fragment.refresh(mCurrentFilter);
-        }
-    }
+//    private void refreshList() {
+//        PersonListFragment fragment = (PersonListFragment) getFragmentManager()
+//                .findFragmentByTag(PersonListFragment.TAG);
+//        if(fragment != null) {
+//            fragment.refresh(mCurrentFilter);
+//        }
+//    }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         // Switching out the filter when a new spinner option is selected.
         mCurrentFilter = i;
-        refreshList();
+//        refreshList();
     }
 
     @Override
