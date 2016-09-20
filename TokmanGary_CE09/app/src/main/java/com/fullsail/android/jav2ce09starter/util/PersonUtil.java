@@ -14,6 +14,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// Gary Tokman
+// JAV2 - 1609
+// PersonUtil
+
 public class PersonUtil {
 
     private static final String PERSON_FILE = "people.dat";
@@ -39,7 +43,9 @@ public class PersonUtil {
      */
     public static void deletePerson(Context context, Person person) {
         ArrayList<Person> people = loadPeople(context);
-        while(people.remove(person));
+        while(true) {
+            if (!(people.remove(person))) break;
+        }
         savePeople(context, people);
     }
 

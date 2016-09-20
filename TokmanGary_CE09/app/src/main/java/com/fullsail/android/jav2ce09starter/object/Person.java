@@ -5,6 +5,10 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
+// Gary Tokman
+// JAV2 - 1609
+// Person
+
 public class Person {
 
     private static final String KEY_FIRST = "first";

@@ -10,6 +10,10 @@ import android.widget.EditText;
 import com.fullsail.android.jav2ce09starter.R;
 import com.fullsail.android.jav2ce09starter.object.Person;
 
+// Gary Tokman
+// JAV2 - 1609
+// PersonFormFragment
+
 public class PersonFormFragment extends Fragment {
 
     public static final String TAG = "PersonFormFragment.TAG";

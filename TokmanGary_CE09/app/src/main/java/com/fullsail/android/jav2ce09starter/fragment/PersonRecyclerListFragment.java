@@ -1,16 +1,17 @@
 package com.fullsail.android.jav2ce09starter.fragment;
 
-import android.app.Activity;
-import android.app.ListFragment;
-import android.content.Context;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.ViewGroup;
 
 import com.fullsail.android.jav2ce09starter.R;
+import com.fullsail.android.jav2ce09starter.adapters.PersonRecyclerAdapter;
 import com.fullsail.android.jav2ce09starter.object.Person;
 import com.fullsail.android.jav2ce09starter.util.PersonUtil;
 
@@ -18,7 +19,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 
-public class PersonListFragment extends ListFragment implements AdapterView.OnItemLongClickListener {
+// Gary Tokman
+// JAV2 - 1609
+// PersonRecyclerListFragment
+
+public class PersonRecyclerListFragment extends Fragment {
+
+
 
     // Don't be scared by the many annotations. This is here to ensure that you only
     // ever use a proper filter value with the newInstance or refresh methods.
@@ -29,6 +36,7 @@ public class PersonListFragment extends ListFragment implements AdapterView.OnIt
     public static final int FILTER_ALL = 0;
     private static final int FILTER_UNDER_30 = 1;
     private static final int FILTER_30_UP = 2;
+    private RecyclerView mRecyclerView;
 
     public static final String TAG = "PersonListFragment.TAG";
 
@@ -40,65 +48,24 @@ public class PersonListFragment extends ListFragment implements AdapterView.OnIt
      * @param filter Defines the data to be shown based on one of the FilterMode values.
      * @return A new PersonListFragment with the proper arguments set.
      */
-    public static PersonListFragment newInstance(@FilterMode int filter) {
-        PersonListFragment fragment = new PersonListFragment();
+    public static PersonRecyclerListFragment newInstance(@FilterMode int filter) {
+        PersonRecyclerListFragment fragment = new PersonRecyclerListFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_FILTER, filter);
         fragment.setArguments(args);
         return fragment;
     }
 
-    /**
-     * Should be implemented in any containing activity. Used to handle item clicks.
-     */
-    public interface OnPersonInteractionListener {
-        void onPersonClicked(Person p);
-        void onPersonLongClicked(Person p);
-    }
-
-    private OnPersonInteractionListener mListener;
-
+    @Nullable
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        getListenerFromContext(context);
-    }
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        getListenerFromContext(activity);
-    }
+        View view = inflater.inflate(R.layout.person_recycler_view, container, false);
 
-
-    /**
-     * onAttach(Context) is only available in API 23+ and onAttach(Activity)
-     * is used for older versions. This method unifies the two onAttach methods
-     * so that the proper functionality is called on all platforms.
-     *
-     * @param context The context from either onAttach method.
-     */
-    private void getListenerFromContext(Context context) {
-        if(context instanceof OnPersonInteractionListener) {
-            mListener = (OnPersonInteractionListener)context;
-        } else {
-            throw new ClassCastException("Containing activity must " +
-                    "implement OnPersonInteractionListener");
-        }
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        setEmptyText(getString(R.string.no_people_available));
-
-        // ListFragment has a helper for regular item clicks, but not long clicks.
-        // Therefore, we must attach our own long click listener.
-        ListView lv = getListView();
-        if(lv != null) {
-            lv.setOnItemLongClickListener(this);
-        }
+        // Init recycle view
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.person_recycler_view);
+        // Set manager
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // Getting the filter that was passed into the fragment via newInstance.
         Bundle args = getArguments();
@@ -106,6 +73,8 @@ public class PersonListFragment extends ListFragment implements AdapterView.OnIt
 
         // Update the list with the currently loaded data.
         refresh(filter);
+
+        return view;
     }
 
     /**
@@ -118,9 +87,9 @@ public class PersonListFragment extends ListFragment implements AdapterView.OnIt
         ArrayList<Person> people = PersonUtil.loadPeople(getActivity());
         people = filterPeople(people, filter);
 
-        ArrayAdapter<Person> peopleAdapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_list_item_1, people);
-        setListAdapter(peopleAdapter);
+        // Set adapter
+        PersonRecyclerAdapter adapter = new PersonRecyclerAdapter(people, getActivity());
+        mRecyclerView.setAdapter(adapter);
     }
 
     /**
@@ -145,18 +114,5 @@ public class PersonListFragment extends ListFragment implements AdapterView.OnIt
             }
         }
         return filtered;
-    }
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        Person person = (Person)l.getAdapter().getItem(position);
-        mListener.onPersonClicked(person);
-    }
-
-    @Override
-    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-        Person person = (Person)adapterView.getAdapter().getItem(position);
-        mListener.onPersonLongClicked(person);
-        return true;
     }
 }

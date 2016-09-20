@@ -21,6 +21,10 @@ import com.fullsail.android.jav2ce09starter.viewholders.PersonHolder;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
+// Gary Tokman
+// JAV2 - 1609
+// MainActivity
+
 public class MainActivity extends AppCompatActivity implements PersonHolder.OnClickEvent {
 
     private static final int REQUEST_FORM = 0x01001;
@@ -113,13 +117,13 @@ public class MainActivity extends AppCompatActivity implements PersonHolder.OnCl
     public void itemDidLongPress(Person person) {
 
         // Action mode
-        ActionMode actionMode = startSupportActionMode(mCallback);
+        startSupportActionMode(mCallback);
         Log.d(TAG, "itemDidLongPress: " + person.getFullName());
         mPerson = person;
 
     }
 
-    private ActionMode.Callback mCallback = new ActionMode.Callback() {
+    private final ActionMode.Callback mCallback = new ActionMode.Callback() {
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             getMenuInflater().inflate(R.menu.action_menu, menu);
@@ -144,9 +148,7 @@ public class MainActivity extends AppCompatActivity implements PersonHolder.OnCl
         }
 
         @Override
-        public void onDestroyActionMode(ActionMode mode) {
-
-        }
+        public void onDestroyActionMode(ActionMode mode) {}
     };
 
     /**
@@ -155,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements PersonHolder.OnCl
     private void refreshList() {
         PersonRecyclerListFragment fragment = (PersonRecyclerListFragment) getFragmentManager()
                 .findFragmentByTag(PersonRecyclerListFragment.TAG);
-        if(fragment != null) {
+        if (fragment != null) {
             fragment.refresh(mCurrentFilter);
         }
     }
