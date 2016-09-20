@@ -1,17 +1,17 @@
 package com.fullsail.android.jav2ce09starter.activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.fullsail.android.jav2ce09starter.R;
 import com.fullsail.android.jav2ce09starter.fragment.PersonListFragment;
@@ -22,13 +22,13 @@ import com.fullsail.android.jav2ce09starter.viewholders.PersonHolder;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-public class MainActivity extends AppCompatActivity implements
-        PersonListFragment.OnPersonInteractionListener, PersonHolder.OnClickEvent {
+public class MainActivity extends AppCompatActivity implements PersonHolder.OnClickEvent {
 
     private static final int REQUEST_FORM = 0x01001;
     private static final String TAG = "MainActivity";
 
     private int mCurrentFilter;
+    private Person mPerson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,34 +99,68 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onPersonClicked(Person p) {
-        Toast.makeText(this, p.getFullName(), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onPersonLongClicked(final Person p) {
-        new AlertDialog.Builder(this)
-                .setTitle(R.string.confirm_delete)
-                .setMessage(R.string.confirm_delete_message)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        PersonUtil.deletePerson(MainActivity.this, p);
-//                        refreshList();
-                    }
-                })
-                .setNegativeButton(R.string.no, null)
-                .show();
-    }
+//    @Override
+//    public void onPersonLongClicked(final Person p) {
+//        new AlertDialog.Builder(this)
+//                .setTitle(R.string.confirm_delete)
+//                .setMessage(R.string.confirm_delete_message)
+//                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        PersonUtil.deletePerson(MainActivity.this, p);
+////                        refreshList();
+//                    }
+//                })
+//                .setNegativeButton(R.string.no, null)
+//                .show();
+//    }
 
     @Override
     public void itemDidPress(String description) {
+        // Snack bar
         Snackbar snackbar = Snackbar
                 .make(findViewById(android.R.id.content), description, Snackbar.LENGTH_SHORT);
 
         snackbar.show();
     }
+
+    @Override
+    public void itemDidLongPress(Person person) {
+
+        ActionMode actionMode = startSupportActionMode(mCallback);
+        Log.d(TAG, "itemDidLongPress: " + person.getFullName());
+        mPerson = person;
+
+    }
+
+    private ActionMode.Callback mCallback = new ActionMode.Callback() {
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            getMenuInflater().inflate(R.menu.action_menu, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+
+            if (item.getItemId() == R.id.action_delete) {
+                Log.d(TAG, "onActionItemClicked: delete");
+                PersonUtil.deletePerson(MainActivity.this, mPerson);
+            }
+
+            return true;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+
+        }
+    };
 
     /**
      * Refreshes the current list fragment with the most recent filter.

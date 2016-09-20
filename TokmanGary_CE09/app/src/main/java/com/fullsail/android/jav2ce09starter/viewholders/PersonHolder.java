@@ -19,11 +19,14 @@ public class PersonHolder extends RecyclerView.ViewHolder implements View.OnClic
 
     public interface OnClickEvent {
         void itemDidPress(String description);
+
+        void itemDidLongPress(Person person);
     }
 
     private static final String TAG = "PersonHolder";
     private final TextView mPersonDetails;
     private OnClickEvent mEvent;
+    private Person mPerson;
 
     public PersonHolder(View itemView, Context context) {
         super(itemView);
@@ -49,12 +52,15 @@ public class PersonHolder extends RecyclerView.ViewHolder implements View.OnClic
     public void bindView(Person person) {
         // Set text view
         mPersonDetails.setText(person.getFullName() + " " + person.getAge());
+        mPerson = person;
     }
 
     @Override
     public boolean onLongClick(View view) {
 
         Log.d(TAG, "onLongClick: ");
+        mEvent.itemDidLongPress(mPerson);
+
 
         return true;
     }
