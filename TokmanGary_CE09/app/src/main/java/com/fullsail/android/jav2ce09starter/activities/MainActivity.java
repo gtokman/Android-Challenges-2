@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,14 +18,15 @@ import com.fullsail.android.jav2ce09starter.fragment.PersonListFragment;
 import com.fullsail.android.jav2ce09starter.fragment.PersonRecyclerListFragment;
 import com.fullsail.android.jav2ce09starter.object.Person;
 import com.fullsail.android.jav2ce09starter.util.PersonUtil;
+import com.fullsail.android.jav2ce09starter.viewholders.PersonHolder;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 public class MainActivity extends AppCompatActivity implements
-        PersonListFragment.OnPersonInteractionListener {
+        PersonListFragment.OnPersonInteractionListener, PersonHolder.OnClickEvent {
 
     private static final int REQUEST_FORM = 0x01001;
-    private static final String TAG = "MainActvity";
+    private static final String TAG = "MainActivity";
 
     private int mCurrentFilter;
 
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements
         mCurrentFilter = PersonListFragment.FILTER_ALL;
 
         // Adding our list fragment one time only.
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
 //            PersonListFragment fragment = PersonListFragment.newInstance(mCurrentFilter);
             PersonRecyclerListFragment fragment = new PersonRecyclerListFragment();
             getFragmentManager().beginTransaction()
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onActivityResult(requestCode, resultCode, data);
 
         // Only refresh the list if a save operation was successful.
-        if(requestCode == REQUEST_FORM && resultCode == RESULT_OK) {
+        if (requestCode == REQUEST_FORM && resultCode == RESULT_OK) {
 //            refreshList();
         }
     }
@@ -116,6 +118,14 @@ public class MainActivity extends AppCompatActivity implements
                 })
                 .setNegativeButton(R.string.no, null)
                 .show();
+    }
+
+    @Override
+    public void itemDidPress(String description) {
+        Snackbar snackbar = Snackbar
+                .make(findViewById(android.R.id.content), description, Snackbar.LENGTH_SHORT);
+
+        snackbar.show();
     }
 
     /**

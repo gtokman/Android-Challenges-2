@@ -32,7 +32,7 @@ public class PersonRecyclerAdapter extends RecyclerView.Adapter<PersonHolder> {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View view = layoutInflater.inflate(R.layout.person_recycler_item, parent, false);
 
-        return new PersonHolder(view);
+        return new PersonHolder(view, mContext);
     }
 
     @Override
