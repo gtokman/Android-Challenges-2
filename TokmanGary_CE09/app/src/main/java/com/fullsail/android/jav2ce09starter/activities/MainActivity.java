@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.fullsail.android.jav2ce09starter.R;
-import com.fullsail.android.jav2ce09starter.fragment.PersonListFragment;
 import com.fullsail.android.jav2ce09starter.fragment.PersonRecyclerListFragment;
 import com.fullsail.android.jav2ce09starter.object.Person;
 import com.fullsail.android.jav2ce09starter.util.PersonUtil;
@@ -57,14 +56,13 @@ public class MainActivity extends AppCompatActivity implements PersonHolder.OnCl
         });
 
         // Assigning the default filter.
-        mCurrentFilter = PersonListFragment.FILTER_ALL;
+        mCurrentFilter = PersonRecyclerListFragment.FILTER_ALL;
 
         // Adding our list fragment one time only.
         if (savedInstanceState == null) {
-//            PersonListFragment fragment = PersonListFragment.newInstance(mCurrentFilter);
-            PersonRecyclerListFragment fragment = new PersonRecyclerListFragment();
+            PersonRecyclerListFragment fragment = PersonRecyclerListFragment.newInstance(mCurrentFilter);
             getFragmentManager().beginTransaction()
-                    .replace(R.id.container, fragment, PersonListFragment.TAG)
+                    .replace(R.id.container, fragment, PersonRecyclerListFragment.TAG)
                     .commit();
         }
     }
@@ -76,13 +74,16 @@ public class MainActivity extends AppCompatActivity implements PersonHolder.OnCl
                 case R.id.tab_search_one:
                     mCurrentFilter = 0;
                     Log.d(TAG, "onTabReSelected: 0");
+                    refreshList();
                     break;
                 case R.id.tab_search_two:
                     mCurrentFilter = 1;
+                    refreshList();
                     Log.d(TAG, "onTabReSelected: 1");
                     break;
                 case R.id.tab_search_three:
                     mCurrentFilter = 2;
+                    refreshList();
                     Log.d(TAG, "onTabReSelected: 2");
                     break;
             }
@@ -95,25 +96,9 @@ public class MainActivity extends AppCompatActivity implements PersonHolder.OnCl
 
         // Only refresh the list if a save operation was successful.
         if (requestCode == REQUEST_FORM && resultCode == RESULT_OK) {
-//            refreshList();
+            refreshList();
         }
     }
-
-//    @Override
-//    public void onPersonLongClicked(final Person p) {
-//        new AlertDialog.Builder(this)
-//                .setTitle(R.string.confirm_delete)
-//                .setMessage(R.string.confirm_delete_message)
-//                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        PersonUtil.deletePerson(MainActivity.this, p);
-////                        refreshList();
-//                    }
-//                })
-//                .setNegativeButton(R.string.no, null)
-//                .show();
-//    }
 
     @Override
     public void itemDidPress(String description) {
@@ -127,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements PersonHolder.OnCl
     @Override
     public void itemDidLongPress(Person person) {
 
+        // Action mode
         ActionMode actionMode = startSupportActionMode(mCallback);
         Log.d(TAG, "itemDidLongPress: " + person.getFullName());
         mPerson = person;
@@ -151,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements PersonHolder.OnCl
             if (item.getItemId() == R.id.action_delete) {
                 Log.d(TAG, "onActionItemClicked: delete");
                 PersonUtil.deletePerson(MainActivity.this, mPerson);
+                refreshList();
             }
 
             return true;
@@ -165,12 +152,12 @@ public class MainActivity extends AppCompatActivity implements PersonHolder.OnCl
     /**
      * Refreshes the current list fragment with the most recent filter.
      */
-//    private void refreshList() {
-//        PersonListFragment fragment = (PersonListFragment) getFragmentManager()
-//                .findFragmentByTag(PersonListFragment.TAG);
-//        if(fragment != null) {
-//            fragment.refresh(mCurrentFilter);
-//        }
-//    }
+    private void refreshList() {
+        PersonRecyclerListFragment fragment = (PersonRecyclerListFragment) getFragmentManager()
+                .findFragmentByTag(PersonRecyclerListFragment.TAG);
+        if(fragment != null) {
+            fragment.refresh(mCurrentFilter);
+        }
+    }
 
 }

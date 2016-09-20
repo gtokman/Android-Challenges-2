@@ -19,7 +19,6 @@ public class PersonHolder extends RecyclerView.ViewHolder implements View.OnClic
 
     public interface OnClickEvent {
         void itemDidPress(String description);
-
         void itemDidLongPress(Person person);
     }
 
@@ -57,10 +56,9 @@ public class PersonHolder extends RecyclerView.ViewHolder implements View.OnClic
 
     @Override
     public boolean onLongClick(View view) {
-
+        // Notify delegate
         Log.d(TAG, "onLongClick: ");
         mEvent.itemDidLongPress(mPerson);
-
 
         return true;
     }
