@@ -20,7 +20,12 @@ public class VoteInfo implements Serializable {
 		mQuestion = question;
 		mVote = vote;
 	}
-	
+
+	@Override
+	public String toString() {
+		return mQuestion;
+	}
+
 	public void setId(int id) {
 		mId = id;
 	}

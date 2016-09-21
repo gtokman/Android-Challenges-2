@@ -25,7 +25,13 @@
             android:label="Politician"/>
 
         <activity android:name=".VoteInfoActivity"
-            android:label="Vote Info"/>
+            android:label="Vote Info">
+            <intent-filter>
+                <action android:name="com.fullsail.android.ACTION_VIEW_VOTE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+        </activity>
 
         <activity android:name=".SettingsActivity"
             android:label="Settings"/>

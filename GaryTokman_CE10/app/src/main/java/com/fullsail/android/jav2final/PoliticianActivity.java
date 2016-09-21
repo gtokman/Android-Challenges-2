@@ -3,6 +3,7 @@ package com.fullsail.android.jav2final;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -44,8 +45,19 @@ public class PoliticianActivity extends Activity implements VoteHistoryListFragm
 
     @Override
     public void onVoteSelected(int voteId) {
-        throw new UnsupportedOperationException("onVoteSelected method not implemented. Make this method" +
-                " start the VoteInfoActivity using an implicit intent and delete this exception.");
+
+        // Start implicit intent
+        Intent intent = new Intent(ACTION_VIEW_VOTE);
+        intent.putExtra(VoteInfoActivity.EXTRA_VOTE_ID, voteId);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_politician, menu);
+
+        return true;
     }
 
     @Override

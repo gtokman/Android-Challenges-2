@@ -3,6 +3,7 @@ package com.fullsail.android.jav2final;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -73,5 +74,9 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         startActivityForResult(intent, REQUEST_VIEW_POLITICIAN);
     }
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 }
