@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -117,9 +118,11 @@ public class PoliticianListFragment extends ListFragment implements GetPoliticia
             politicians = new ArrayList<>();
         }
 
-        ListAdapter adapter = null;
+        ListAdapter adapter;
         if(SettingsHelper.getListType(getActivity()) == SettingsHelper.LIST_TYPE_DETAILED) {
             adapter = new PoliticianAdapter(getActivity(), politicians);
+        } else {
+            adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, politicians);
         }
         setListAdapter(adapter);
     }

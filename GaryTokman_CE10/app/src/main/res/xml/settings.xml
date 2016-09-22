@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/appearance" >
+    <PreferenceCategory android:title="@string/appearance">
 
-        <ListPreference android:key="com.fullsail.android.PREF_LIST_TYPE"
-            android:title="@string/list_item_appearance"
+        <ListPreference
+            android:defaultValue="TYPE_DETAILED"
+            android:entries="@array/list_types"
+            android:entryValues="@array/list_type_values"
+            android:key="com.fullsail.android.PREF_LIST_TYPE"
             android:summary="@string/list_item_appearance_summary"
-            android:defaultValue="TYPE_DETAILED" />
+            android:title="@string/list_item_appearance"/>
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/data" >
+    <PreferenceCategory android:title="@string/data">
 
-        <Preference android:key="com.fullsail.android.PREF_DELETE_AL"
-            android:title="@string/delete_all"
-            android:summary="@string/delete_all_summary" />
+        <Preference
+            android:key="com.fullsail.android.PREF_DELETE_ALL"
+            android:summary="@string/delete_all_summary"
+            android:title="@string/delete_all"/>
 
     </PreferenceCategory>
 

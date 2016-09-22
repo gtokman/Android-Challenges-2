@@ -16,7 +16,8 @@ public class SettingsActivity extends Activity {
         if(savedInstanceState == null) {
             SettingsFragment frag = new SettingsFragment();
             getFragmentManager().beginTransaction()
-                    .replace(R.id.container, frag, SettingsFragment.TAG);
+                    .replace(R.id.container, frag, SettingsFragment.TAG)
+                    .commit();
         }
     }
 }

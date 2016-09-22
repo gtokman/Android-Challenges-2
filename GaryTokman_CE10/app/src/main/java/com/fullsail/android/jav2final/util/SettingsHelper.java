@@ -8,7 +8,7 @@ import android.preference.PreferenceManager;
 
 public class SettingsHelper {
 
-    private static final String PREF_LIST_TYPE = "";
+    private static final String PREF_LIST_TYPE = "com.fullsail.android.PREF_LIST_TYPE";
 
     public static final int LIST_TYPE_DETAILED = 0;
     public static final int LIST_TYPE_SIMPLE = 1;

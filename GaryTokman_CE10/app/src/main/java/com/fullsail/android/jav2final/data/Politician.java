@@ -54,11 +54,20 @@ public class Politician implements Serializable {
 	public void setId(int id) {
 		mId = id;
 	}
-	
+
+	@Override
+	public String toString() {
+		return mName;
+	}
+
+
 	@Override
 	public boolean equals(Object o) {
-        // TODO: Implement this so that two politicians are equal if they have the same ID.
-		
-		return false;
+
+		Politician that = (Politician) o;
+
+		return mId == that.mId;
+
 	}
+
 }

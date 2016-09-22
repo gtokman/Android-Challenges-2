@@ -33,7 +33,7 @@ public class VoteInfoFragment extends Fragment implements GetSingleVoteTask.Vote
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        
+
         return inflater.inflate(R.layout.vote_info_fragment, container, false);
     }
 

@@ -107,9 +107,9 @@ public class VoteHistoryListFragment extends ListFragment implements GetVoteInfo
 
         ListAdapter adapter;
         if(SettingsHelper.getListType(getActivity()) == SettingsHelper.LIST_TYPE_DETAILED) {
-            adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, info);
-        } else {
             adapter = new VoteHistoryAdapter(getActivity(), info);
+        } else {
+            adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, info);
         }
         setListAdapter(adapter);
     }
@@ -153,8 +153,8 @@ public class VoteHistoryListFragment extends ListFragment implements GetVoteInfo
             TextView tv = (TextView)convertView.findViewById(R.id.question);
             tv.setText(info.getQuestion());
 
-            TextView voteText = (TextView)convertView.findViewById(R.id.vote);
-            voteText.setText(info.getVote());
+            tv = (TextView)convertView.findViewById(R.id.vote);
+            tv.setText(info.getVote());
 
             return convertView;
         }

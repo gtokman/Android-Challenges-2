@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.fullsail.android.jav2final.data.Politician;
 import com.fullsail.android.jav2final.fragment.VoteHistoryListFragment;
@@ -64,8 +63,8 @@ public class PoliticianActivity extends Activity implements VoteHistoryListFragm
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.action_save) {
-            PoliticiansHelper.saveToFavorites(this, null);
-            Toast.makeText(this, R.string.politician_saved, Toast.LENGTH_SHORT).show();
+            PoliticiansHelper.saveToFavorites(this, mPolitician);
+//            Toast.makeText(this, R.string.politician_saved, Toast.LENGTH_SHORT).show();
             return true;
         }
 

@@ -27,6 +27,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        Preference deleteButton = findPreference(PREF_DELETE_ALL);
+        deleteButton.setOnPreferenceClickListener(this);
+
     }
 
     @Override

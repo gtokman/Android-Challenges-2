@@ -31,8 +31,6 @@ public class GetPoliticiansTask extends AsyncTask<Integer, Void, ArrayList<Polit
 
         int filter = params[0];
 
-
-
         ArrayList<Politician> politicians = null;
 
         if(filter == FILTER_ALL) {
